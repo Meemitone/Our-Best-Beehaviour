@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class StalkSway : MonoBehaviour
+public class StalkSway : PlantPart
 {
     [SerializeField] internal GameObject nextPivot;
     [SerializeField] internal GameObject otherPivot;
@@ -46,14 +46,15 @@ public class StalkSway : MonoBehaviour
     [SerializeField] int segmentCount = 0;
 
     // Start is called before the first frame update
-    void Start()
+    internal override void Start()
     {
+        base.Start();
         sway = new Quaternion();
         if (!root)
         {
             if (transform.parent != null && transform.parent.parent != null)
             {
-                if (transform.parent.parent.TryGetComponent<StalkSway>(out prevStalk))
+                if (transform.parent.parent.TryGetComponent(out prevStalk)) //TryGetComponent will try for a "this" by default
                 {
                     prevStalk.nextStalk = this;
                     prevStalk.head = false;
@@ -69,12 +70,15 @@ public class StalkSway : MonoBehaviour
 
     }
 
-    private void Update()
+    internal override void Update()
     {
+        if (prevStalk != null) //remove when instantiated by seed
+            maxScale = prevStalk.maxScale * 0.95f;
+        base.Update();
         if (!head)
         {
-            if(nextStalk!=null)
-            transform.localRotation =  Quaternion.Lerp(transform.localRotation, nextStalk.transform.localRotation, dampening*Time.deltaTime);
+            if (nextStalk != null)
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, nextStalk.transform.localRotation, dampening * Time.deltaTime);
             else
             {
                 head = true;
@@ -84,11 +88,11 @@ public class StalkSway : MonoBehaviour
         {
             if (swayMotion == null)
             {
-                if(segmentCount <= 0)
+                if (segmentCount <= 0)
                 {
                     segmentCount = CountSegments();
                 }
-                float localSwayRange = swayRange/segmentCount;
+                float localSwayRange = swayRange / segmentCount;
                 sway.eulerAngles = new Vector3(Random.Range(-localSwayRange, localSwayRange), 0, Random.Range(-localSwayRange, localSwayRange));
                 swayTime = Random.Range(swayTimeRangeMin, swayTimeRangeMax);
                 swayMotion = StartCoroutine(SwayCoroutine());
@@ -119,7 +123,7 @@ public class StalkSway : MonoBehaviour
         do
         {
             timer += Time.deltaTime;
-            d = Mathf.Cos(Mathf.PI*(1 - timer/time));
+            d = Mathf.Cos(Mathf.PI * (1 - timer / time));
             d = d + 1;
             d = d / 2;
             transform.localRotation = Quaternion.Slerp(start, end, d);
@@ -132,5 +136,5 @@ public class StalkSway : MonoBehaviour
         yield break;
     }
 
-    
+
 }

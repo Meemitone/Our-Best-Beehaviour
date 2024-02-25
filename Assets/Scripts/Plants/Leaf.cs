@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeafLightDetection : MonoBehaviour
+public class Leaf : PlantPart
 {
+    
     [SerializeField] GameObject center;
     [SerializeField] GameObject[] radials;
     [SerializeField] float maxCastDist;
@@ -11,16 +12,27 @@ public class LeafLightDetection : MonoBehaviour
     [SerializeField] bool debug = false; //draw rays and update ratioDisplay each frame if true
     [SerializeField] bool debugPrint = false; //print colliders hit by central ray if true
     [SerializeField] float ratioDisplay = 0;
+    [SerializeField] float baseLeafEnergyGen = 1f;
     // Start is called before the first frame update
-    void Start()
+    internal override void Start()
     {
-
+        base.Start();
     }
     // Update is called once per frame
-    void Update()
+    internal override void Update()
     {
+        base.Update();
         if (debug)
             ratioDisplay = GetLightRatio();
+    }
+
+    public override float GetUpkeep()
+    {
+        ratioDisplay = GetLightRatio();
+        float Generated = ratioDisplay * baseLeafEnergyGen * linearScale * Time.deltaTime;
+
+        float BaseUpkeep = base.GetUpkeep();
+        return BaseUpkeep + Generated;
     }
 
     float GetLightRatio()
@@ -28,10 +40,10 @@ public class LeafLightDetection : MonoBehaviour
         Quaternion lightDirection = EnvironmentalSunlight.instance.transform.rotation;
 
         Vector3 LD = lightDirection * Vector3.forward;
-        LD = -LD;
+        LD = -LD; //backwards
 
         RaycastHit[] radialCasts = new RaycastHit[radials.Length];
-        RaycastHit centralCast = new RaycastHit();
+        RaycastHit centralCast; ;
 
         Physics.Raycast(center.transform.position, LD, out centralCast, maxCastDist, Physics.AllLayers, QueryTriggerInteraction.Collide);
         if (debug)

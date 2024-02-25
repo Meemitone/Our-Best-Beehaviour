@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7f10f5f41c0479c4a8e28067688159f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -176,6 +176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4362318bf12d1d541989551e10969107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linearScale: 0.01
+  startScale: 0.01
+  growthRate: 0.1
+  maxScale: 1
+  growCostScale: 1
+  isGrowing: 1
+  upkeepCostScale: 0
   nextPivot: {fileID: 1833831675110392490}
   otherPivot: {fileID: 5054037106220111400}
   nextStalk: {fileID: 0}
@@ -186,7 +193,7 @@ MonoBehaviour:
   swayRange: 120
   swayTimeRangeMin: 1
   swayTimeRangeMax: 3
-  dampening: 0.9
+  dampening: 0.95
   segmentCount: 0
 --- !u!1 &5054037106220111400
 GameObject:
