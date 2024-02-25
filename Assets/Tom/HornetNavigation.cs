@@ -20,18 +20,20 @@ public class HornetNavigation : MonoBehaviour
     [SerializeField] private Vector3 wanderDirection = Vector3.forward;
 
     [Header("Flocking")]
-    [SerializeField] private float neighbourRadius = 5;
+    [SerializeField] private List<HornetNavigation> hornets;
     [SerializeField] private List<HornetNavigation> neighbours;
+    [SerializeField] private List<HornetNavigation> tooClose;
+
+    [SerializeField] private float updateListTimer = 0;
+    
+    [SerializeField] private float neighbourRadius = 5;
+    [SerializeField] private float tooCloseRadius = 2;
+    
     [SerializeField] private Vector3 neighboursCenter;
     [SerializeField] private Vector3 neighboursDirection;
     [SerializeField] private Vector3 followNeighboursCenter;
-
-    [SerializeField] private float tooCloseRadius = 2;
-    [SerializeField] private List<HornetNavigation> tooClose;
     [SerializeField] private Vector3 tooCloseAvoidance;
-    [SerializeField] private float tooCloseAvoidanceStrength;
-    
-    [SerializeField] private List<HornetNavigation> hornets;
+
 
     [Header("Feeding")] 
     [SerializeField] private Vector3 closestFood;
@@ -40,14 +42,16 @@ public class HornetNavigation : MonoBehaviour
     [SerializeField] private Vector3 homePosition;
 
 
+    private void Awake()
+    {
+        updateListTimer = Random.Range(0f, 5f);
+    }
 
     private void FixedUpdate()
     {
         CheckDirections();
         ApplyWeights();
-    
         Movement();
-        
         DisplayVectors();
     }
 
@@ -66,7 +70,7 @@ public class HornetNavigation : MonoBehaviour
     {
         targetDirection = Vector3.zero;
         targetDirection += wanderDirection.normalized;
-        targetDirection += followNeighboursCenter.normalized;
+        targetDirection += followNeighboursCenter.normalized * 2f;
         targetDirection += neighboursDirection.normalized;
         targetDirection += tooCloseAvoidance.normalized;
     }
@@ -91,8 +95,6 @@ public class HornetNavigation : MonoBehaviour
         Debug.DrawLine(transform.position, neighboursCenter, Color.gray);
         Debug.DrawLine(neighboursCenter, neighboursCenter + neighboursDirection * neighbours.Count, Color.yellow);
         Debug.DrawLine(transform.position, transform.position + tooCloseAvoidance, Color.gray);
-        
-
     }
     
     
@@ -116,26 +118,14 @@ public class HornetNavigation : MonoBehaviour
     
     void CheckFlockDirection()
     {
-        // creates the lists
-        neighbours = new List<HornetNavigation>();
-        tooClose = new List<HornetNavigation>();
-        hornets = FindObjectsOfType<HornetNavigation>().ToList();
-        
-        for (int i = 0; i < hornets.Count; i++)
+        if (updateListTimer <= 0)
         {
-
-            float dist = (hornets[i].transform.position - transform.position).magnitude;
-
-            if (dist < neighbourRadius)
-            {
-                neighbours.Add(hornets[i]);
-            }
-
-            if (dist < tooCloseRadius &&  hornets[i] != this)
-            { 
-                tooClose.Add(hornets[i]);
-            }
-            
+            updateListTimer = Random.Range(0.2f, 5f);
+            UpdateLists();
+        }
+        else
+        {
+            updateListTimer -= Time.fixedDeltaTime;
         }
 
         // finds flock center and heading
@@ -164,7 +154,29 @@ public class HornetNavigation : MonoBehaviour
 
     }
 
-    
+    void UpdateLists()
+    {
+        // creates the lists
+        neighbours = new List<HornetNavigation>();
+        tooClose = new List<HornetNavigation>();
+        hornets = FindObjectsOfType<HornetNavigation>().ToList();
+        
+        for (int i = 0; i < hornets.Count; i++)
+        {
+
+            float dist = (hornets[i].transform.position - transform.position).magnitude;
+
+            if (dist < neighbourRadius)
+            {
+                neighbours.Add(hornets[i]);
+            }
+
+            if (dist < tooCloseRadius &&  hornets[i] != this)
+            { 
+                tooClose.Add(hornets[i]);
+            }
+        }
+    }
     
     
     void CheckFoodDirection()
