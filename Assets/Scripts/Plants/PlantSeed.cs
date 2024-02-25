@@ -8,7 +8,6 @@ public class PlantSeed : MonoBehaviour
     [SerializeField] GameObject Segment;
     [SerializeField] GameObject Leaf;
     [SerializeField] GameObject Flower;
-    [SerializeField] bool growing = true;//??
 
 
     [SerializeField] FlowerData genetics;
@@ -19,7 +18,7 @@ public class PlantSeed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(MutateGlobal.instance);
+
     }
 
     // Update is called once per frame
@@ -36,6 +35,7 @@ public class PlantSeed : MonoBehaviour
 }
 
 
+[Serializable]
 public class FlowerData
 {
     [Header("L,S,F only (for Leaf Segment and Flower (for now))")]
@@ -60,7 +60,7 @@ public class FlowerData
         }
         set
         {//introduce rng here
-            GeneCode = value;
+            geneCode = value;
         }
     }
 
@@ -117,10 +117,6 @@ public class FlowerData
                 int modifier = 1 << change;
                 bits ^= modifier;
                 float answer = BitConverter.Int32BitsToSingle(bits);
-                if (answer > 1)
-                {
-                    Debug.Log(modifier);
-                }
                 result.growRate = answer;
             }
 
@@ -138,10 +134,6 @@ public class FlowerData
                 int modifier = 1 << change;
                 bits ^= modifier;
                 float answer = BitConverter.Int32BitsToSingle(bits);
-                if (answer > 1)
-                {
-                    Debug.Log(modifier);
-                }
                 result.segmentSize = answer;
             }
 
@@ -183,10 +175,6 @@ public class FlowerData
                 int modifier = 1 << change;
                 bits ^= modifier;
                 float answer = BitConverter.Int32BitsToSingle(bits);
-                if (answer > 1)
-                {
-                    Debug.Log(modifier);
-                }
                 result.leafSize = answer;
             }
         }
@@ -216,6 +204,10 @@ public class FlowerData
                     //and skip next letter, therby replacing
                 }
             }
+        }
+        if(result.geneCode == "")
+        {
+            result.geneCode += 'F';
         }
 
 

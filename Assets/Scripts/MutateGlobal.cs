@@ -7,7 +7,7 @@ public class MutateGlobal : MonoBehaviour
     static MutateGlobal Instance;
 
     [SerializeField] internal float plantMutateChance, plantAddChance, plantDeleteChance, plantReplaceChance;
-
+    [SerializeField] internal float plantCharLChance, plantCharFChance, plantCharSChance;
     public static MutateGlobal instance
     {
         get
@@ -73,6 +73,14 @@ public class MutateGlobal : MonoBehaviour
 
     public char GetRandomGeneCodeLetter()
     {
-        return 'L';
+        float rand = Random.value;
+        if (rand < plantCharFChance)
+            return 'F';
+        else if (rand < plantCharFChance + plantCharLChance)
+            return 'L';
+        else if (rand < plantCharFChance + plantCharLChance + plantCharSChance)
+            return 'S';
+        else
+            return 'N';
     }
 }
