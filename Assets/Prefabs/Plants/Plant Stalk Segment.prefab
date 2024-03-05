@@ -170,6 +170,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2218805574750881882}
   - component: {fileID: 7990401009230957577}
+  - component: {fileID: 2252843797431803711}
+  - component: {fileID: 5802740943091268088}
   m_Layer: 0
   m_Name: Plant Stalk Segment
   m_TagString: Untagged
@@ -221,11 +223,39 @@ MonoBehaviour:
   Root: 0
   Head: 0
   sway: {x: 0, y: 0, z: 0, w: 0}
-  swayRange: 120
+  swayRange: 90
   swayTimeRangeMin: 1
   swayTimeRangeMax: 3
   dampening: 0.95
   segmentCount: 0
+--- !u!114 &2252843797431803711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243724424650197838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63df988aea710543aa00bcaaf849914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  weight: 1
+--- !u!114 &5802740943091268088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243724424650197838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435b8eef6e63b59488d68282084ce92b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  weight: 1
 --- !u!1 &5054037106220111400
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +280,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5054037106220111400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

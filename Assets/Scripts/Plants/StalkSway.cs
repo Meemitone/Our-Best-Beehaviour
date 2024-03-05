@@ -10,14 +10,12 @@ public class StalkSway : PlantPart
     [SerializeField] internal StalkSway nextStalk;
     [SerializeField] internal StalkSway prevStalk;
     [SerializeField] private bool Root, Head;
-    [SerializeField]
     public bool root
     {
         get { return Root; }
         set { Root = value; }
     }
 
-    [SerializeField]
     public bool head
     {
         get { return Head; }
@@ -45,10 +43,13 @@ public class StalkSway : PlantPart
 
     [SerializeField] int segmentCount = 0;
 
+    private Behaviour[] behaviours;
+
     // Start is called before the first frame update
     internal override void Start()
     {
         base.Start();
+        behaviours = GetComponents<Behaviour>();
         sway = new Quaternion();
         if (!root)
         {
@@ -70,11 +71,9 @@ public class StalkSway : PlantPart
 
     }
 
-    internal override void Update()
+
+    internal void FixedUpdate()
     {
-        if (prevStalk != null) //remove when instantiated by seed
-            maxScale = prevStalk.maxScale * 0.975f;
-        base.Update();
         if (!head)
         {
             if (nextStalk != null)
@@ -86,17 +85,23 @@ public class StalkSway : PlantPart
         }
         else
         {
-            if (swayMotion == null)
+            if (segmentCount <= 0)
             {
-                if (segmentCount <= 0)
-                {
-                    segmentCount = CountSegments();
-                }
-                float localSwayRange = swayRange / segmentCount;
-                sway.eulerAngles = new Vector3(Random.Range(-localSwayRange, localSwayRange), 0, Random.Range(-localSwayRange, localSwayRange));
-                swayTime = Random.Range(swayTimeRangeMin, swayTimeRangeMax);
-                swayMotion = StartCoroutine(SwayCoroutine());
+                segmentCount = CountSegments();
             }
+            Vector3 forceAcc = Vector3.zero;
+            foreach(Behaviour b in behaviours)
+            {
+                forceAcc += b.CalculateForce();
+            }
+
+            /*
+            float localSwayRange = swayRange / segmentCount;
+            sway.eulerAngles = new Vector3(Random.Range(-localSwayRange, localSwayRange), 0, Random.Range(-localSwayRange, localSwayRange));
+            swayTime = Random.Range(swayTimeRangeMin, swayTimeRangeMax);
+            swayMotion = StartCoroutine(SwayCoroutine());
+            */
+
         }
     }
 

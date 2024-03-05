@@ -43,7 +43,7 @@ public class Leaf : PlantPart
         LD = -LD; //backwards
 
         RaycastHit[] radialCasts = new RaycastHit[radials.Length];
-        RaycastHit centralCast; ;
+        RaycastHit centralCast;
 
         Physics.Raycast(center.transform.position, LD, out centralCast, maxCastDist, Physics.AllLayers, QueryTriggerInteraction.Collide);
         if (debug)
