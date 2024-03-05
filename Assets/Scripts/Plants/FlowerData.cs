@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlowerData
 {
     [Header("L,S,F only (for Leaf Segment and Flower (for now))")]
-    public string geneCode;//Segment Segment Segment Leaf Leaf Leaf Segment Flower
+    public string geneCode;//Segment Segment Segment Leaf Leaf Leaf Segment Flower //SSSLLLSF
 
     public float growRate;
     public float segmentSize;
@@ -17,18 +17,6 @@ public class FlowerData
 
 
     public float energy;
-
-    public string GeneCode
-    {
-        get
-        {
-            return geneCode;
-        }
-        set
-        {//introduce rng here
-            geneCode = value;
-        }
-    }
 
     public FlowerData()
     {//default values
@@ -175,7 +163,7 @@ public class FlowerData
         {
             result.geneCode += 'F';
         }
-
+        result.geneCode = PlantGeneticsConstraintSolver(result.geneCode);
 
         return result;
         /*
@@ -200,5 +188,11 @@ public class FlowerData
             }
         }
         */
+    }
+
+    private static String PlantGeneticsConstraintSolver(String Code)
+    {
+        return Code;
+        //edit Code so that it fits requirements (Flower at the end, x leaves per segment and so on)
     }
 }

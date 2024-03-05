@@ -36,15 +36,22 @@ public abstract class PlantPart : MonoBehaviour //Abstract means that this shoul
     // Update is called once per frame
     internal virtual void Update()
     {
-        if(isGrowing)
+
+    }
+
+    public IEnumerator Grow()
+    {
+        isGrowing = true;
+        while (linearScale < maxScale)
         {
             linearScale += growthRate * Time.deltaTime;
-            if(linearScale >= maxScale)
+            if (linearScale >= maxScale)
             {
                 linearScale = maxScale;
                 isGrowing = false;
             }
             transform.localScale = new Vector3(1, 1, 1) * linearScale;
+            yield return null;
         }
     }
 }

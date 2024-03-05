@@ -6,7 +6,9 @@ public class MutateGlobal : MonoBehaviour
 {
     static MutateGlobal Instance;
 
-    [SerializeField] internal float plantMutateChance, plantAddChance, plantDeleteChance, plantReplaceChance;
+    [SerializeField] internal float plantMutateChance, 
+        //these three are for specifically changing the growth structure
+        plantAddChance, plantDeleteChance, plantReplaceChance;
     [SerializeField] internal float plantCharLChance, plantCharFChance, plantCharSChance;
     public static MutateGlobal instance
     {

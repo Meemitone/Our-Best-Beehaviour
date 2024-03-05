@@ -73,7 +73,7 @@ public class StalkSway : PlantPart
     internal override void Update()
     {
         if (prevStalk != null) //remove when instantiated by seed
-            maxScale = prevStalk.maxScale * 0.95f;
+            maxScale = prevStalk.maxScale * 0.975f;
         base.Update();
         if (!head)
         {
@@ -113,6 +113,8 @@ public class StalkSway : PlantPart
         return count;
     }
 
+
+    //This'll be depreciated when actual motion happens with wind and/or such
     IEnumerator SwayCoroutine()
     {
         Quaternion start = transform.localRotation;
