@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Leaf : PlantPart
 {
-    
+
     [SerializeField] GameObject center;
     [SerializeField] GameObject[] radials;
     [SerializeField] float maxCastDist;
@@ -37,10 +37,7 @@ public class Leaf : PlantPart
 
     float GetLightRatio()
     {
-        Quaternion lightDirection = EnvironmentalSunlight.instance.transform.rotation;
-
-        Vector3 LD = lightDirection * Vector3.forward;
-        LD = -LD; //backwards
+        Vector3 LD = -EnvironmentalSunlight.instance.transform.forward;
 
         RaycastHit[] radialCasts = new RaycastHit[radials.Length];
         RaycastHit centralCast;

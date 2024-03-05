@@ -76,11 +76,11 @@ public class MutateGlobal : MonoBehaviour
     public char GetRandomGeneCodeLetter()
     {
         float rand = Random.value;
-        if (rand < plantCharFChance)
+        if (rand <= plantCharFChance)
             return 'F';
-        else if (rand < plantCharFChance + plantCharLChance)
+        else if (rand <= plantCharFChance + plantCharLChance)
             return 'L';
-        else if (rand < plantCharFChance + plantCharLChance + plantCharSChance)
+        else if (rand <= plantCharFChance + plantCharLChance + plantCharSChance)
             return 'S';
         else
             return 'N';

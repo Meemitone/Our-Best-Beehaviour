@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class StalkSway : PlantPart
+public class Stalk : PlantPart
 {
     [SerializeField] internal GameObject nextPivot;
     [SerializeField] internal GameObject otherPivot;
-    [SerializeField] internal StalkSway nextStalk;
-    [SerializeField] internal StalkSway prevStalk;
+    [SerializeField] internal Stalk nextStalk;
+    [SerializeField] internal Stalk prevStalk;
     [SerializeField] private bool Root, Head;
     public bool root
     {
@@ -23,19 +23,11 @@ public class StalkSway : PlantPart
         {
             Head = value;
             segmentCount = 0; //if I suddenly stop being the head, or become the head, chance is, segment count has changed setting it to zero has it recalculate
-            if (!Head)
-            {
-                if (swayMotion != null)
-                {
-                    StopCoroutine(swayMotion);
-                    swayMotion = null;
-                }
-            }
         }
     }
     [SerializeField] internal Quaternion sway;
     [SerializeField] internal float swayRange = 30f;
-    private Coroutine swayMotion;
+    //private Coroutine swayMotion;
     private float swayTime;
     [SerializeField] internal float swayTimeRangeMin = 0.5f;
     [SerializeField] internal float swayTimeRangeMax = 1f;
@@ -77,7 +69,7 @@ public class StalkSway : PlantPart
         if (!head)
         {
             if (nextStalk != null)
-                transform.localRotation = Quaternion.Lerp(transform.localRotation, nextStalk.transform.localRotation, dampening * Time.deltaTime);
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, nextStalk.transform.localRotation, dampening * Time.deltaTime);
             else
             {
                 head = true;
@@ -90,10 +82,22 @@ public class StalkSway : PlantPart
                 segmentCount = CountSegments();
             }
             Vector3 forceAcc = Vector3.zero;
-            foreach(Behaviour b in behaviours)
+            foreach (Behaviour b in behaviours)
             {
                 forceAcc += b.CalculateForce();
             }
+            Vector3 forceAccZ = forceAcc;
+            Vector3 forceAccX = forceAcc;
+            forceAccZ.x = 0;
+            forceAccX.z = 0;
+            float xAngle = Vector3.Angle(Vector3.up, forceAccX);
+            float zAngle = Vector3.Angle(Vector3.up, forceAccZ);
+
+            xAngle = Mathf.Clamp(xAngle, 0, swayRange);
+            zAngle = Mathf.Clamp(zAngle, 0, swayRange);
+
+            sway.eulerAngles = new Vector3(forceAccZ.z < 0 ? -zAngle / segmentCount : zAngle / segmentCount, 0, forceAccX.x > 0 ? -xAngle / segmentCount : xAngle / segmentCount);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, sway, dampening * Time.deltaTime);
 
             /*
             float localSwayRange = swayRange / segmentCount;
@@ -108,7 +112,7 @@ public class StalkSway : PlantPart
     private int CountSegments()
     {
         int count = 0;
-        StalkSway pointer = this;
+        Stalk pointer = this;
         do
         {
             count++;
@@ -119,29 +123,29 @@ public class StalkSway : PlantPart
     }
 
 
-    //This'll be depreciated when actual motion happens with wind and/or such
-    IEnumerator SwayCoroutine()
-    {
-        Quaternion start = transform.localRotation;
-        Quaternion end = sway;
-        float time = swayTime;
-        float timer = 0f;
-        float d; //between -1 and 1
-        do
-        {
-            timer += Time.deltaTime;
-            d = Mathf.Cos(Mathf.PI * (1 - timer / time));
-            d = d + 1;
-            d = d / 2;
-            transform.localRotation = Quaternion.Slerp(start, end, d);
+    ////This'll be depreciated when actual motion happens with wind and/or sun
+    //IEnumerator SwayCoroutine()
+    //{
+    //    Quaternion start = transform.localRotation;
+    //    Quaternion end = sway;
+    //    float time = swayTime;
+    //    float timer = 0f;
+    //    float d; //between -1 and 1
+    //    do
+    //    {
+    //        timer += Time.deltaTime;
+    //        d = Mathf.Cos(Mathf.PI * (1 - timer / time));
+    //        d = d + 1;
+    //        d = d / 2;
+    //        transform.localRotation = Quaternion.Slerp(start, end, d);
 
-            yield return null;
-        }
-        while (timer < time);
-        transform.localRotation = end;
-        swayMotion = null;
-        yield break;
-    }
+    //        yield return null;
+    //    }
+    //    while (timer < time);
+    //    transform.localRotation = end;
+    //    swayMotion = null;
+    //    yield break;
+    //}
 
 
 }

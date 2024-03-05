@@ -194,5 +194,7 @@ public class FlowerData
     {
         return Code;
         //edit Code so that it fits requirements (Flower at the end, x leaves per segment and so on)
+
+        //on ssecond review, I'll leave extra letters in, for mutation chances (a flower in the middle will block code after it, but re-enable it if it goes away. Similarly with extra leaves, inserting a segment into a bunch of leaves seperates them
     }
 }

@@ -182,7 +182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4195189630469699041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 0, z: 0}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.00016666666, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -330,7 +330,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee75b14bf7d7f34093df96330fd0846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linearScale: 1
+  linearScale: 0.01
+  startScale: 0.01
+  growthRate: 1
+  maxScale: 1
+  growCostScale: 1
+  isGrowing: 1
   upkeepCostScale: 1
   center: {fileID: 3734755807868435527}
   radials:
@@ -341,10 +346,10 @@ MonoBehaviour:
   - {fileID: 1021249149432020155}
   - {fileID: 882219116591957444}
   maxCastDist: 10
-  debug: 0
+  debug: 1
   debugPrint: 0
   ratioDisplay: 0
-  generatorRatio: 1
+  baseLeafEnergyGen: 1
 --- !u!1 &7274791893016456563
 GameObject:
   m_ObjectHideFlags: 0

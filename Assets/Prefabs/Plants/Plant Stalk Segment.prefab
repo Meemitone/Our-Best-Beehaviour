@@ -211,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linearScale: 0.01
   startScale: 0.01
-  growthRate: 0.1
+  growthRate: 1
   maxScale: 1
   growCostScale: 1
   isGrowing: 1

@@ -12,9 +12,7 @@ public class FollowSun : Behaviour
 
     public override Vector3 CalculateForce()
     {
-        Quaternion lightDirection = EnvironmentalSunlight.instance.transform.rotation;
-        Vector3 LD = lightDirection * Vector3.forward;
-        LD = -LD; //backwards
+        Vector3 LD = -EnvironmentalSunlight.instance.transform.forward;
         return LD * weight;
     }
 }

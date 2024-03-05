@@ -854,10 +854,10 @@ MonoBehaviour:
   Leaf: {fileID: 5514839878220612982, guid: 4c9b98da0cf39b549b5c8fb5b5bace98, type: 3}
   Flower: {fileID: 3477093778837364505, guid: 08c124beccd137d46b81a7b8ca1bcb17, type: 3}
   genetics:
-    geneCode: SSSLLLSSSSSSSSF
+    geneCode: SSSLLLF
     growRate: 0.1
     segmentSize: 1
-    segmentSizeRatio: 0.95
+    segmentSizeRatio: 0.975
     leafSize: 1
     seedCount: 3
     energy: 7
@@ -1260,13 +1260,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68e65aab6eb5d094f896910f04dc2be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantMutateChance: 0.05
+  plantMutateChance: 1
   plantAddChance: 0.33
   plantDeleteChance: 0.33
   plantReplaceChance: 0.33
   plantCharLChance: 0.33
   plantCharFChance: 0.33
-  plantCharSChance: 0.33
+  plantCharSChance: 0.34
 --- !u!114 &2056612480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,17 +1322,17 @@ PrefabInstance:
     - target: {fileID: 2218805574750881882, guid: 72c059d0c4ee7e54ba13860e1b397272,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2218805574750881882, guid: 72c059d0c4ee7e54ba13860e1b397272,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2218805574750881882, guid: 72c059d0c4ee7e54ba13860e1b397272,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2218805574750881882, guid: 72c059d0c4ee7e54ba13860e1b397272,
         type: 3}
@@ -1387,7 +1387,7 @@ PrefabInstance:
     - target: {fileID: 3477093778837364504, guid: 08c124beccd137d46b81a7b8ca1bcb17,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3477093778837364504, guid: 08c124beccd137d46b81a7b8ca1bcb17,
         type: 3}

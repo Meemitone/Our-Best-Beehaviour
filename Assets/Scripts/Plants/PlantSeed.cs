@@ -13,12 +13,15 @@ public class PlantSeed : MonoBehaviour
     [SerializeField] FlowerData genetics;
 
     public bool debugMutate = false;
-
+    List<int> LeafPivots;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GrowPlant());
+        LeafPivots = new List<int>();
+        for (int j = 0; j < 6; j++)
+            LeafPivots.Add(j);
+        StartCoroutine(GrowPlant()); 
     }
 
     // Update is called once per frame
@@ -28,12 +31,15 @@ public class PlantSeed : MonoBehaviour
         {
             debugMutate = false;
             genetics = FlowerData.Copy(genetics);
+            StopCoroutine(GrowPlant());
+            Destroy(transform.GetChild(0).gameObject);
+            StartCoroutine(GrowPlant());
         }
     }
 
     IEnumerator GrowPlant()
     {
-        StalkSway currentSegment = null;
+        Stalk currentSegment = null;
         for(int i = 0; i < genetics.geneCode.Length; i++)
         {
             char GeneLetter = genetics.geneCode[i];
@@ -43,14 +49,15 @@ public class PlantSeed : MonoBehaviour
                     if(currentSegment == null)
                     {
                         GameObject newSegment = Instantiate(Segment, transform);
-                        currentSegment = newSegment.GetComponent<StalkSway>();
+                        currentSegment = newSegment.GetComponent<Stalk>();
                         yield return StartCoroutine(currentSegment.Grow());
                     }
                     else
                     {
                         GameObject newSegment = Instantiate(Segment, currentSegment.nextPivot.transform);
+                        newSegment.transform.localRotation = currentSegment.transform.localRotation;
                         float previousMaxScale = currentSegment.maxScale;
-                        currentSegment = newSegment.GetComponent<StalkSway>();
+                        currentSegment = newSegment.GetComponent<Stalk>();
                         currentSegment.maxScale = previousMaxScale * genetics.segmentSizeRatio;
                         yield return StartCoroutine(currentSegment.Grow());
                     }
@@ -58,24 +65,51 @@ public class PlantSeed : MonoBehaviour
                 case 'L':
                     if(currentSegment == null)
                     {
-                        Debug.LogWarning("PlantGenetics Should not start with 'L'");
+                        //Debug.LogWarning("PlantGenetics Should not start with 'L'");
                     }
                     else
-                    {
-                        //get random pivot from the OtherPivots Group
-                        //instantiate a leaf childed to that
-                        //don't double up
+                    {//Will grow Leaves on a random Leaf Pivot, won't grow a seventh
+                        shuffleIntList(LeafPivots);
+                        foreach (int p in LeafPivots)
+                        {
+                            if(currentSegment.otherPivot.transform.GetChild(p).childCount == 0)
+                            {
+                                GameObject target = currentSegment.otherPivot.transform.GetChild(p).gameObject;
+                                GameObject newLeaf = Instantiate(Leaf, target.transform);
+                                yield return StartCoroutine(newLeaf.GetComponent<PlantPart>().Grow());
+                                break;
+                            }
+                        }
                     }
                     break;
                 case 'F':
-                    
-                    break;
+                    GameObject newFlower = Instantiate(Flower, currentSegment.nextPivot.transform);
+                    yield return StartCoroutine(newFlower.GetComponent<PlantPart>().Grow());
+                    yield break;
                 default:
                     Debug.LogError("GrowPlant not expecting a '" + GeneLetter + "'");
                     break;
             }
         }
 
-        yield return null;
+        yield break;
+    }
+
+
+    private void shuffleIntList(List<int> inputList)
+    {    //take any list of GameObjects and return it with Fischer-Yates shuffle
+        int i = 0;
+        int t = inputList.Count;
+        int r = 0;
+        int p = 0;
+
+        while (i < t - 1)
+        {
+            r = Random.Range(i, inputList.Count);
+            p = inputList[i];
+            inputList[i] = inputList[r];
+            inputList[r] = p;
+            i++;
+        }
     }
 }
