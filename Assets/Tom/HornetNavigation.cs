@@ -44,7 +44,7 @@ public class HornetNavigation : MonoBehaviour
 
     private void Awake()
     {
-        updateListTimer = Random.Range(0f, 5f);
+        //updateListTimer = Random.Range(0f, 5f);
     }
 
     private void FixedUpdate()
@@ -119,13 +119,13 @@ public class HornetNavigation : MonoBehaviour
     void CheckFlockDirection()
     {
         if (updateListTimer <= 0)
-        {
-            updateListTimer = Random.Range(0.2f, 5f);
+        { 
+            updateListTimer = Random.Range(0.2f, 5f); 
             UpdateLists();
         }
         else
         {
-            updateListTimer -= Time.fixedDeltaTime;
+            //updateListTimer -= Time.fixedDeltaTime;
         }
 
         // finds flock center and heading
