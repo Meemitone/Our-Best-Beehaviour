@@ -346,7 +346,7 @@ MonoBehaviour:
   - {fileID: 1021249149432020155}
   - {fileID: 882219116591957444}
   maxCastDist: 10
-  debug: 1
+  debug: 0
   debugPrint: 0
   ratioDisplay: 0
   baseLeafEnergyGen: 1

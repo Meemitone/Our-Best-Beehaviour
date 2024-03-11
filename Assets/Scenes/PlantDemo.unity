@@ -854,7 +854,7 @@ MonoBehaviour:
   Leaf: {fileID: 5514839878220612982, guid: 4c9b98da0cf39b549b5c8fb5b5bace98, type: 3}
   Flower: {fileID: 3477093778837364505, guid: 08c124beccd137d46b81a7b8ca1bcb17, type: 3}
   genetics:
-    geneCode: SSSLLLF
+    geneCode: SSSLSSSSSSSLLF
     growRate: 0.1
     segmentSize: 1
     segmentSizeRatio: 0.975

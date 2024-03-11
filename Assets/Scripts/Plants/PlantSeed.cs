@@ -31,7 +31,7 @@ public class PlantSeed : MonoBehaviour
         {
             debugMutate = false;
             genetics = FlowerData.Copy(genetics);
-            StopCoroutine(GrowPlant());
+            StopAllCoroutines();
             Destroy(transform.GetChild(0).gameObject);
             StartCoroutine(GrowPlant());
         }
@@ -83,9 +83,17 @@ public class PlantSeed : MonoBehaviour
                     }
                     break;
                 case 'F':
-                    GameObject newFlower = Instantiate(Flower, currentSegment.nextPivot.transform);
-                    yield return StartCoroutine(newFlower.GetComponent<PlantPart>().Grow());
-                    yield break;
+                    if (currentSegment == null)
+                    {
+                        break;
+                        //Debug.LogWarning("PlantGenetics Should not start with 'F'");
+                    }
+                    else
+                    {
+                        GameObject newFlower = Instantiate(Flower, currentSegment.nextPivot.transform);
+                        yield return StartCoroutine(newFlower.GetComponent<PlantPart>().Grow());
+                        yield break;
+                    }
                 default:
                     Debug.LogError("GrowPlant not expecting a '" + GeneLetter + "'");
                     break;
