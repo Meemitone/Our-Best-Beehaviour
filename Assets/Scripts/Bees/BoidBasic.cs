@@ -31,7 +31,7 @@ public abstract class BoidBasic : MonoBehaviour
 public abstract class Behaviour : MonoBehaviour
 {
 
-    public bool active;
+    public bool active = true;
     public float weight = 1.0f;//prioity
 
     public virtual Vector3 CalculateForce()

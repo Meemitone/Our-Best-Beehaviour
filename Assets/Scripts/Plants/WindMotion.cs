@@ -15,4 +15,9 @@ public class WindMotion : Behaviour
     {
         
     }
+
+    public override Vector3 CalculateForce()
+    {
+        return EnvironmentalData.instance.GetWind(transform.position) * weight;
+    }
 }

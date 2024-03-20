@@ -84,6 +84,7 @@ public class Stalk : PlantPart
             Vector3 forceAcc = Vector3.zero;
             foreach (Behaviour b in behaviours)
             {
+                if(b.active)
                 forceAcc += b.CalculateForce();
             }
             Vector3 forceAccZ = forceAcc;

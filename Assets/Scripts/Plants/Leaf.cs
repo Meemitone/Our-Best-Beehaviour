@@ -37,7 +37,7 @@ public class Leaf : PlantPart
 
     float GetLightRatio()
     {
-        Vector3 LD = -EnvironmentalSunlight.instance.transform.forward;
+        Vector3 LD = -EnvironmentalData.instance.transform.forward;
 
         RaycastHit[] radialCasts = new RaycastHit[radials.Length];
         RaycastHit centralCast;

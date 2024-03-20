@@ -12,7 +12,7 @@ public class FollowSun : Behaviour
 
     public override Vector3 CalculateForce()
     {
-        Vector3 LD = -EnvironmentalSunlight.instance.transform.forward;
+        Vector3 LD = -EnvironmentalData.instance.transform.forward;
         return LD * weight;
     }
 }
