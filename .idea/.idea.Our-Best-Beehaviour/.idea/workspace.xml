@@ -7,6 +7,10 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../Ascend/Games Programmin/Assets/Assignment/Scripts/Water.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Ascend/Games Programmin/Assets/Assignment/Scripts/MeshGen.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -56,6 +60,7 @@
       <workItem from="1708725126436" duration="1428000" />
       <workItem from="1708877953276" duration="9764000" />
       <workItem from="1708892723153" duration="2564000" />
+      <workItem from="1711466582143" duration="7988000" />
     </task>
     <servers />
   </component>
