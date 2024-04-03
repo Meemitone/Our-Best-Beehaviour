@@ -7,42 +7,42 @@ namespace Assets.Scripts.Bees
     public class BeeBoid : BoidBasic
     {
 
+        public float turnSpeed = 0.2f;
+        public float rotaSpeed = 0.2f;
 
+        public Vector3 currentDirection;
 
-    }
+        public float turnMax;
 
-    public class Wander : Behaviour
-    {
+        private void FixedUpdate()
+        {
 
-    }
+            Movement();
+            Rotation();
 
-    public class Flock : Behaviour
-    {
+        }
 
-    }
+        public void Movement()
+        {
 
-    public class Flee : Behaviour
-    {
+            currentDirection = Vector3.RotateTowards(currentDirection, force, turnSpeed, turnSpeed);
+            transform.Translate(currentDirection);
 
-    }
+        }
 
-    public class Seek : Behaviour
-    {
+        public void Rotation()
+        {
+            //transform.rotation = Quaternion.LookRotation(currentDirection.normalized);
 
-    }
+            Quaternion newRotation = Quaternion.LookRotation(currentDirection.normalized);
 
-    public class Arrive : Behaviour
-    {
+            Vector2 rotations = new Vector2(force.normalized.x - currentDirection.normalized.x, force.normalized.y - currentDirection.normalized.y);
 
-    }
+            newRotation = Quaternion.Euler(rotations.y * turnMax, newRotation.eulerAngles.y, rotations.x * turnMax);
 
-    public class Collect : Behaviour
-    {
-
-    }
-
-    public class Pursue : Behaviour
-    {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotaSpeed);
+            
+        }
 
     }
 }

@@ -6,13 +6,14 @@ using System;
 public abstract class BoidBasic : MonoBehaviour
 {
 
-    [SerializeField] Vector3 force;
-    [SerializeField] float maxForce = 6;
-    [SerializeField] Behaviour[] behaviours;
+    public Vector3 force;
+    public float maxForce = 6;
+    public Behaviour[] behaviours;
 
 
     internal virtual void Update()
     {
+
         force = new Vector3();
         foreach (Behaviour behaviour in behaviours)
         {

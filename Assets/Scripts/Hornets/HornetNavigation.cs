@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class HornetNavigation : MonoBehaviour
 {
-
+    
     [Header("Moving")]
     public Vector3 currentDirection = Vector3.forward;
     [SerializeField] private Vector3 targetDirection;
