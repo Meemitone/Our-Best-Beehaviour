@@ -26,7 +26,7 @@ public class FlowerData
         segmentSizeRatio = 0.95f;
         leafSize = 1f;
         seedCount = 3;
-        energy = 7f;
+        energy = 100f;
     }
 
     public FlowerData(string Code, float gR, float sS, float sSR, float lS, int sC, float e)
@@ -41,7 +41,7 @@ public class FlowerData
     }
 
 
-    public static FlowerData Copy(FlowerData source, float Energy = 7, bool mutate = true)
+    public static FlowerData Copy(FlowerData source, float Energy = 100f, bool mutate = true)
     {//when making a copy {FlowerData seed = new Flowerdata(parentPlantData)}
         FlowerData result = new();
 

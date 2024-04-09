@@ -8,25 +8,36 @@ public class PlantSeed : MonoBehaviour
     [SerializeField] GameObject Segment;
     [SerializeField] GameObject Leaf;
     [SerializeField] GameObject Flower;
-
-
+    [Header("")]
+    public float energy;
+    private float energyInterval = 1f;
     [SerializeField] FlowerData genetics;
-
+    [SerializeField] Rigidbody myRB;
+    [SerializeField] GameObject model;
     public bool debugMutate = false;
     List<int> LeafPivots;
+    public List<PlantPart> parts;
 
     // Start is called before the first frame update
     void Start()
     {
+        energy = genetics.energy;
         LeafPivots = new List<int>();
         for (int j = 0; j < 6; j++)
             LeafPivots.Add(j);
-        StartCoroutine(GrowPlant()); 
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if(myRB!=null && transform.position.y < 2f && myRB.velocity.sqrMagnitude < 0.01f)
+        {
+            model.transform.localRotation = transform.rotation;
+            transform.rotation = Quaternion.identity;
+            StartCoroutine(GrowPlant());
+            Destroy(myRB);
+        }
+
         if (debugMutate)
         {
             debugMutate = false;
@@ -34,6 +45,33 @@ public class PlantSeed : MonoBehaviour
             StopAllCoroutines();
             Destroy(transform.GetChild(0).gameObject);
             StartCoroutine(GrowPlant());
+        }
+    }
+
+    IEnumerator Die()
+    {
+        StopAllCoroutines();
+        Destroy(gameObject);
+        yield return null;
+    }
+
+    IEnumerator Energy()
+    {
+        yield return new WaitForSeconds(Random.Range(0,1f));
+        while(true)
+        {
+            float cost = 0f;
+            foreach(PlantPart part in parts)
+            {
+                cost += part.GetUpkeep();
+            }
+            energy -= cost;
+            if(energy <= 0)
+            {
+                StartCoroutine(Die());
+                yield break;
+            }
+            yield return new WaitForSeconds(energyInterval);
         }
     }
 
@@ -50,6 +88,7 @@ public class PlantSeed : MonoBehaviour
                     {
                         GameObject newSegment = Instantiate(Segment, transform);
                         currentSegment = newSegment.GetComponent<Stalk>();
+                        parts.Add(newSegment.GetComponent<PlantPart>());
                         yield return StartCoroutine(currentSegment.Grow());
                     }
                     else
@@ -59,6 +98,7 @@ public class PlantSeed : MonoBehaviour
                         float previousMaxScale = currentSegment.maxScale;
                         currentSegment = newSegment.GetComponent<Stalk>();
                         currentSegment.maxScale = previousMaxScale * genetics.segmentSizeRatio;
+                        parts.Add(newSegment.GetComponent<PlantPart>());
                         yield return StartCoroutine(currentSegment.Grow());
                     }
                     break;
@@ -76,6 +116,7 @@ public class PlantSeed : MonoBehaviour
                             {
                                 GameObject target = currentSegment.otherPivot.transform.GetChild(p).gameObject;
                                 GameObject newLeaf = Instantiate(Leaf, target.transform);
+                                parts.Add(newLeaf.GetComponent<PlantPart>());
                                 yield return StartCoroutine(newLeaf.GetComponent<PlantPart>().Grow());
                                 break;
                             }
@@ -91,6 +132,8 @@ public class PlantSeed : MonoBehaviour
                     else
                     {
                         GameObject newFlower = Instantiate(Flower, currentSegment.nextPivot.transform);
+                        newFlower.GetComponent<Flower>().myGenes = genetics;
+                        parts.Add(newFlower.GetComponent<PlantPart>());
                         yield return StartCoroutine(newFlower.GetComponent<PlantPart>().Grow());
                         yield break;
                     }
@@ -99,7 +142,6 @@ public class PlantSeed : MonoBehaviour
                     break;
             }
         }
-
         yield break;
     }
 

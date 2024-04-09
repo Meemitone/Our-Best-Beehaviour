@@ -39,7 +39,7 @@ public abstract class PlantPart : MonoBehaviour //Abstract means that this shoul
 
     }
 
-    public IEnumerator Grow()
+    public virtual IEnumerator Grow()
     {
         isGrowing = true;
         while (linearScale < maxScale)
