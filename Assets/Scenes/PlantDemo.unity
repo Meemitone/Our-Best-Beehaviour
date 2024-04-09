@@ -55668,7 +55668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2054140627}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: WindGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55877,10 +55877,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68e65aab6eb5d094f896910f04dc2be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantMutateChance: 1
+  plantMutateChance: 0.05
   plantAddChance: 0.33
   plantDeleteChance: 0.33
-  plantReplaceChance: 0.33
+  plantReplaceChance: 0.34
   plantCharLChance: 0.33
   plantCharFChance: 0.33
   plantCharSChance: 0.34

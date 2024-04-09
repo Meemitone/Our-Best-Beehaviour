@@ -15,7 +15,7 @@ public abstract class PlantPart : MonoBehaviour //Abstract means that this shoul
 
     public virtual float GetUpkeep()//A virtual has a default implementation, but can be overriden by an inheriting class
     {
-        float cost = -upkeepCostScale * linearScale * Time.deltaTime * (isGrowing ? growCostScale: 0f);
+        float cost = -upkeepCostScale * linearScale * Time.deltaTime * (isGrowing ? growCostScale: 1f);
         //should be negative unless leaf makes energy
         return cost;
     }

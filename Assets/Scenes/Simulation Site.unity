@@ -232,6 +232,8 @@ GameObject:
   - component: {fileID: 191096215}
   - component: {fileID: 191096214}
   - component: {fileID: 191096216}
+  - component: {fileID: 191096218}
+  - component: {fileID: 191096217}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -336,6 +338,42 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!114 &191096217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191096213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e173e0ad72f6344d80b0f87e4b3836c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windXOffset: {x: 0, y: 0}
+  windZOffset: {x: 0, y: 0}
+  windXOffsetDelta: {x: 2, y: 2}
+  windZOffsetDelta: {x: -2, y: -2}
+  windAreaScale: 0.03
+--- !u!114 &191096218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191096213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e65aab6eb5d094f896910f04dc2be7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantMutateChance: 0.05
+  plantAddChance: 0.2
+  plantDeleteChance: 0.2
+  plantReplaceChance: 0.6
+  plantCharLChance: 0.5
+  plantCharFChance: 0.1
+  plantCharSChance: 0.4
 --- !u!1 &611209776
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +427,7 @@ MonoBehaviour:
   plantPrefabs:
   - {fileID: 2243724424650197838, guid: 72c059d0c4ee7e54ba13860e1b397272, type: 3}
   beeHivePrefabs: []
+  recreate: 0
 --- !u!1 &869794616
 GameObject:
   m_ObjectHideFlags: 0

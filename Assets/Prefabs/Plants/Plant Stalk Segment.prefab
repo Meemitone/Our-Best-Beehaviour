@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linearScale: 0.01
   startScale: 0.01
-  growthRate: 100
+  growthRate: 1
   maxScale: 1
   growCostScale: 1
   isGrowing: 1
@@ -221,8 +221,8 @@ MonoBehaviour:
   otherPivot: {fileID: 5054037106220111400}
   nextStalk: {fileID: 0}
   prevStalk: {fileID: 0}
-  Root: 0
-  Head: 0
+  root: 0
+  head: 0
   sway: {x: 0, y: 0, z: 0, w: 0}
   swayRange: 90
   swayTimeRangeMin: 1

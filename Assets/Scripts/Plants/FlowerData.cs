@@ -43,7 +43,7 @@ public class FlowerData
 
     public static FlowerData Copy(FlowerData source, float Energy = 7, bool mutate = true)
     {//when making a copy {FlowerData seed = new Flowerdata(parentPlantData)}
-        FlowerData result = new FlowerData();
+        FlowerData result = new();
 
         result.energy = Energy;
         if(!mutate)
@@ -57,7 +57,7 @@ public class FlowerData
         }
         else
         {
-            if(UnityEngine.Random.value > MutateGlobal.instance.plantMutateChance)
+            if(UnityEngine.Random.value > MutateGlobal.Instance.plantMutateChance)
             {
                 result.growRate = source.growRate;
             }
@@ -74,7 +74,7 @@ public class FlowerData
                 result.growRate = answer;
             }
 
-            if (UnityEngine.Random.value > MutateGlobal.instance.plantMutateChance)
+            if (UnityEngine.Random.value > MutateGlobal.Instance.plantMutateChance)
             {
                 result.segmentSize = source.segmentSize;
             }
@@ -91,7 +91,7 @@ public class FlowerData
                 result.segmentSize = answer;
             }
 
-            if (UnityEngine.Random.value > MutateGlobal.instance.plantMutateChance)
+            if (UnityEngine.Random.value > MutateGlobal.Instance.plantMutateChance)
             {
                 result.segmentSizeRatio = source.segmentSizeRatio; //probably shouldn't change actually
             }
@@ -115,7 +115,7 @@ public class FlowerData
                 */
             }
 
-            if (UnityEngine.Random.value > MutateGlobal.instance.plantMutateChance)
+            if (UnityEngine.Random.value > MutateGlobal.Instance.plantMutateChance)
             {
                 result.leafSize = source.leafSize;
             }
@@ -136,25 +136,25 @@ public class FlowerData
         result.geneCode = "";
         for(int i = 0; i < source.geneCode.Length; i++)
         {
-            if(UnityEngine.Random.value > MutateGlobal.instance.plantMutateChance)
+            if(UnityEngine.Random.value > MutateGlobal.Instance.plantMutateChance)
             {
                 result.geneCode += source.geneCode[i];
             }
             else
             {
                 float rngVal = UnityEngine.Random.value;
-                if (rngVal < MutateGlobal.instance.plantAddChance)
+                if (rngVal < MutateGlobal.Instance.plantAddChance)
                 {
-                    result.geneCode += MutateGlobal.instance.GetRandomGeneCodeLetter();//add a random letter
+                    result.geneCode += MutateGlobal.Instance.GetRandomGeneCodeLetter();//add a random letter
                     result.geneCode += source.geneCode[i];//before putting the next one in
                 }
-                else if (rngVal <  MutateGlobal.instance.plantDeleteChance + MutateGlobal.instance.plantAddChance)
+                else if (rngVal <  MutateGlobal.Instance.plantDeleteChance + MutateGlobal.Instance.plantAddChance)
                 {
                     //do nothing, ie, skip the next letter
                 }
-                else if (rngVal < MutateGlobal.instance.plantDeleteChance + MutateGlobal.instance.plantAddChance + MutateGlobal.instance.plantReplaceChance)
+                else if (rngVal < MutateGlobal.Instance.plantDeleteChance + MutateGlobal.Instance.plantAddChance + MutateGlobal.Instance.plantReplaceChance)
                 {
-                    result.geneCode += MutateGlobal.instance.GetRandomGeneCodeLetter();//add a random letter
+                    result.geneCode += MutateGlobal.Instance.GetRandomGeneCodeLetter();//add a random letter
                     //and skip next letter, therby replacing
                 }
             }
@@ -192,9 +192,30 @@ public class FlowerData
 
     private static String PlantGeneticsConstraintSolver(String Code)
     {
-        return Code;
-        //edit Code so that it fits requirements (Flower at the end, x leaves per segment and so on)
+        String FinalCode = Code;
+        int Stalkcount = 0;
+        for(int i = 0; i < Code.Length; i++)
+        {
+            if(Code[i] == 'S')
+            {
+                Stalkcount++;
+            }
+            if(Code[i] == 'F')
+            {
+                break;
+            }
+        }
+        while(Stalkcount < 3)
+        {
+            Stalkcount++;
+            FinalCode = "S" + FinalCode;
+        }
+        if(!FinalCode.EndsWith('F'))
+        {
+            FinalCode += "F"; //append an F if there isn't one at the ends
+        }
 
-        //on ssecond review, I'll leave extra letters in, for mutation chances (a flower in the middle will block code after it, but re-enable it if it goes away. Similarly with extra leaves, inserting a segment into a bunch of leaves seperates them
+        return FinalCode;
+        //edit Code so that it fits requirements (Flower at the end, x leaves per segment and so on)
     }
 }

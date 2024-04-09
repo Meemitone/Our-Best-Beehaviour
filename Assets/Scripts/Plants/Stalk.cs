@@ -9,26 +9,24 @@ public class Stalk : PlantPart
     [SerializeField] internal GameObject otherPivot;
     [SerializeField] internal Stalk nextStalk;
     [SerializeField] internal Stalk prevStalk;
-    [SerializeField] private bool Root, Head;
-    public bool root
+    [SerializeField] private bool root, head;
+    public bool Root
     {
-        get { return Root; }
-        set { Root = value; }
+        get { return root; }
+        set { root = value; }
     }
 
-    public bool head
+    public bool Head
     {
-        get { return Head; }
+        get { return head; }
         set
         {
-            Head = value;
+            head = value;
             segmentCount = 0; //if I suddenly stop being the head, or become the head, chance is, segment count has changed setting it to zero has it recalculate
         }
     }
     [SerializeField] internal Quaternion sway;
     [SerializeField] internal float swayRange = 30f;
-    //private Coroutine swayMotion;
-    private float swayTime;
     [SerializeField] internal float swayTimeRangeMin = 0.5f;
     [SerializeField] internal float swayTimeRangeMax = 1f;
     [SerializeField] internal float dampening = 0.5f;
@@ -43,22 +41,22 @@ public class Stalk : PlantPart
         base.Start();
         behaviours = GetComponents<Behaviour>();
         sway = new Quaternion();
-        if (!root)
+        if (!Root)
         {
             if (transform.parent != null && transform.parent.parent != null)
             {
                 if (transform.parent.parent.TryGetComponent(out prevStalk)) //TryGetComponent will try for a "this" by default
                 {
                     prevStalk.nextStalk = this;
-                    prevStalk.head = false;
+                    prevStalk.Head = false;
                 }
                 else
                 {
-                    root = true;
+                    Root = true;
                 }
             }
             else
-                root = true;
+                Root = true;
         }
 
     }
@@ -66,13 +64,13 @@ public class Stalk : PlantPart
 
     internal void FixedUpdate()
     {
-        if (!head)
+        if (!Head)
         {
             if (nextStalk != null)
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, nextStalk.transform.localRotation, dampening * Time.deltaTime);
             else
             {
-                head = true;
+                Head = true;
             }
         }
         else

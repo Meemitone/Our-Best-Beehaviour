@@ -37,12 +37,11 @@ public class Leaf : PlantPart
 
     float GetLightRatio()
     {
-        Vector3 LD = -EnvironmentalData.instance.transform.forward;
+        Vector3 LD = -EnvironmentalData.Instance.transform.forward;
 
         RaycastHit[] radialCasts = new RaycastHit[radials.Length];
-        RaycastHit centralCast;
 
-        Physics.Raycast(center.transform.position, LD, out centralCast, maxCastDist, Physics.AllLayers, QueryTriggerInteraction.Collide);
+        Physics.Raycast(center.transform.position, LD, out RaycastHit centralCast, maxCastDist, Physics.AllLayers, QueryTriggerInteraction.Collide);
         if (debug)
             Debug.DrawRay(center.transform.position, LD, centralCast.collider == null ? Color.red : Color.blue);
         if (debugPrint)

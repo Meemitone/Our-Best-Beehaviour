@@ -69,7 +69,7 @@ public class PlantSeed : MonoBehaviour
                     }
                     else
                     {//Will grow Leaves on a random Leaf Pivot, won't grow a seventh
-                        shuffleIntList(LeafPivots);
+                        ShuffleIntList(LeafPivots);
                         foreach (int p in LeafPivots)
                         {
                             if(currentSegment.otherPivot.transform.GetChild(p).childCount == 0)
@@ -104,12 +104,12 @@ public class PlantSeed : MonoBehaviour
     }
 
 
-    private void shuffleIntList(List<int> inputList)
+    private void ShuffleIntList(List<int> inputList)
     {    //take any list of GameObjects and return it with Fischer-Yates shuffle
         int i = 0;
         int t = inputList.Count;
-        int r = 0;
-        int p = 0;
+        int r;
+        int p;
 
         while (i < t - 1)
         {

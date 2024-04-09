@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class MutateGlobal : MonoBehaviour
 {
-    static MutateGlobal Instance;
+    static MutateGlobal instance;
 
     [SerializeField] internal float plantMutateChance, 
         //these three are for specifically changing the growth structure
         plantAddChance, plantDeleteChance, plantReplaceChance;
     [SerializeField] internal float plantCharLChance, plantCharFChance, plantCharSChance;
-    public static MutateGlobal instance
+    public static MutateGlobal Instance
     {
         get
         {
-            if (Instance != null)
+            if (instance != null)
             {
-                return Instance;
+                return instance;
             }
             else
             {
@@ -26,51 +26,40 @@ public class MutateGlobal : MonoBehaviour
                 {
                     if (l.type == LightType.Directional)
                     {
-                        if (!l.gameObject.TryGetComponent<MutateGlobal>(out Instance))
+                        if (!l.gameObject.TryGetComponent<MutateGlobal>(out instance))
                         {
-                            Instance = l.gameObject.AddComponent<MutateGlobal>();
+                            instance = l.gameObject.AddComponent<MutateGlobal>();
                         }
-                        return Instance;
+                        return instance;
                     }
                 }
                 Debug.LogError("No Directional Light in Scene for Sunlight to attach to");
-                GameObject gO = new GameObject();
+                GameObject gO = new();
                 Light light = gO.AddComponent<Light>();
                 light.type = LightType.Directional;
-                Instance = gO.AddComponent<MutateGlobal>();
-                return Instance;
+                instance = gO.AddComponent<MutateGlobal>();
+                return instance;
             }
         }
         private set
         {
-            if (Instance != null)
+            if (instance != null)
             {
-                Instance = value;
+                instance = value;
             }
         }
     }
 
     private void Awake()
     {
-        if (Instance != null)
+        if (instance != null)
         {
             Destroy(this);
         }
         else
         {
-            Instance = this;
+            instance = this;
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public char GetRandomGeneCodeLetter()

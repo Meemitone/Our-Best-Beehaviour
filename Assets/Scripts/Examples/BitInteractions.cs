@@ -6,7 +6,7 @@ using Unity.Mathematics;
 
 public class BitInteractions : MonoBehaviour
 {
-    [SerializeField] float f = 0;
+    public float f;
     [SerializeField] byte[] bytes;
     public bool btf = false;
 
