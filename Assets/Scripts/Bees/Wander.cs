@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Bees
-{
     public class Wander : Behaviour
     {
 
@@ -12,15 +10,23 @@ namespace Assets.Scripts.Bees
         [SerializeField] float resetTimer = 0.5f;
 
         private Vector3 currentCalForce = new Vector3();
+        private Vector3 nextCalForce = new Vector3();
+
+        float currentTime;
 
         public override Vector3 CalculateForce()
         {
             if (resetWander)
             {
-                currentCalForce = new Vector3(Random.Range(-weight, weight), Random.Range(-weight, weight), weight);
-                currentCalForce = Vector3.ClampMagnitude(currentCalForce, weight);
+                nextCalForce = new Vector3(Random.Range(-weight, weight), Random.Range(-weight, weight), Random.Range(-weight, weight));
+                nextCalForce = Vector3.ClampMagnitude(nextCalForce, weight);
+                currentTime = 0;
                 StartCoroutine(ResetWander());
             }
+
+            currentTime += Time.deltaTime;
+
+            currentCalForce = Vector3.Slerp(currentCalForce, nextCalForce, currentTime / resetTimer);
 
             return currentCalForce;
         }
@@ -34,4 +40,3 @@ namespace Assets.Scripts.Bees
             resetWander = true;
         }
     }
-}

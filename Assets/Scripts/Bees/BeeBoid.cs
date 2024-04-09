@@ -2,8 +2,6 @@
 using UnityEngine;
 using System;
 
-namespace Assets.Scripts.Bees
-{
     public class BeeBoid : BoidBasic
     {
 
@@ -25,24 +23,51 @@ namespace Assets.Scripts.Bees
         public void Movement()
         {
 
-            currentDirection = Vector3.RotateTowards(currentDirection, force, turnSpeed, turnSpeed);
+            currentDirection = currentDirection + force * Time.deltaTime;
+
+            currentDirection = Vector3.ClampMagnitude(currentDirection, maxForce);
+
             transform.Translate(currentDirection);
 
         }
 
         public void Rotation()
         {
-            //transform.rotation = Quaternion.LookRotation(currentDirection.normalized);
 
-            Quaternion newRotation = Quaternion.LookRotation(currentDirection.normalized);
+            Vector3 currentUp = CalBank();
 
-            Vector2 rotations = new Vector2(force.normalized.x - currentDirection.normalized.x, force.normalized.y - currentDirection.normalized.y);
+            Vector3 currentFor = CalForward(currentUp);
 
-            newRotation = Quaternion.Euler(rotations.y * turnMax, newRotation.eulerAngles.y, rotations.x * turnMax);
+            if (currentDirection.magnitude > 0)
+            {
+                Quaternion newRotation = Quaternion.LookRotation(currentFor, currentUp);
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, rotaSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 0.1f);
+
+            }
             
         }
 
+        private Vector3 CalBank()
+        {
+
+            Vector3 calculateUp = gravity * Vector3.up;
+
+            calculateUp += force;
+
+            return calculateUp.normalized;
+
+        }
+
+        private Vector3 CalForward(Vector3 up)
+        {
+
+            Vector3 right = Vector3.Cross(currentDirection, up);
+
+            Vector3 forward = Vector3.Cross(up, right);
+
+            return forward;
+
+        }
+
     }
-}

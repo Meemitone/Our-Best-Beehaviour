@@ -8,6 +8,7 @@ public abstract class BoidBasic : MonoBehaviour
 
     public Vector3 force;
     public float maxForce = 6;
+    public float gravity = 3;
     public Behaviour[] behaviours;
 
 
