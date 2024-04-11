@@ -27,7 +27,7 @@ using System;
 
             currentDirection = Vector3.ClampMagnitude(currentDirection, maxForce);
 
-            transform.Translate(currentDirection);
+            transform.Translate(currentDirection * Time.deltaTime);
 
         }
 
@@ -42,7 +42,7 @@ using System;
             {
                 Quaternion newRotation = Quaternion.LookRotation(currentFor, currentUp);
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 0.1f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 0.5f);
 
             }
             

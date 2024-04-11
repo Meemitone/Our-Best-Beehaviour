@@ -5,7 +5,7 @@ using UnityEngine;
 public class Box : MonoBehaviour
 {
 
-    public Box up, down, left, right;
+    public List<Box> neighbours;
 
     public List<BeeBoid> beeBoids = new List<BeeBoid>();
 
