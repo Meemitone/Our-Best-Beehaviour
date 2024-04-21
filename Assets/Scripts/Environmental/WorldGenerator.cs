@@ -6,11 +6,16 @@ using Random = UnityEngine.Random;
 
 public class WorldGenerator : MonoBehaviour
 {
-
+    [Header("Setup")]
     [SerializeField] private int groundSize = 100;
     [SerializeField] private float groundVerticeSeperation = 2f;
     [SerializeField] private float groundWaveHeightScale = 0.9f;
 
+    [Header("Decoration Setup")] 
+    [SerializeField] private int maxDecorPrefabs = 30;
+    [SerializeField] private int minDecorPrefabs = 15;
+
+    [Header("References")]
     [SerializeField] private GameObject ground;
     
     [SerializeField] private GameObject[] smallDecorationPrefabs;
@@ -22,7 +27,8 @@ public class WorldGenerator : MonoBehaviour
     private void Awake()
     {
         GenerateGround();
-        placePlants();
+        PlacePlants();
+        PlaceDecor();
     }
 
 
@@ -82,7 +88,7 @@ public class WorldGenerator : MonoBehaviour
         ground.GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
-    private void placePlants()
+    private void PlacePlants()
     {
         for (int i = 0; i < 20; i++)
         {
@@ -98,6 +104,31 @@ public class WorldGenerator : MonoBehaviour
             else
             {
                 print("No floor hit");
+            }
+        }
+    }
+
+    private void PlaceDecor()
+    {
+        int rand = Random.Range(minDecorPrefabs, maxDecorPrefabs);
+
+        for (int i = 0; i < rand; i++)
+        {
+            Vector3 randomPos = new Vector3(Random.Range(-groundSize/2.1f * groundVerticeSeperation, groundSize/2.1f * groundVerticeSeperation), 100, Random.Range(-groundSize/2.1f * groundVerticeSeperation, groundSize/2.1f * groundVerticeSeperation));
+            
+            if (i < maxDecorPrefabs * 0.7f)
+            {
+                if (Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit))
+                {
+                    Instantiate(smallDecorationPrefabs[Random.Range(0, smallDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity);
+                }
+            }
+            else
+            {
+                if (Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit))
+                {
+                    Instantiate(largeDecorationPrefabs[Random.Range(0, largeDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity);
+                }
             }
         }
     }
