@@ -8,6 +8,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../Salvage Crew/Assets/Scripts/Multiplayer Management/RelayMatchmaker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Salvage Crew/Assets/Scripts/Data Management/GameInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Concern Game/Assets/Tom/Scripts/Progression.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Salvage Crew/Assets/Scripts/Data Management/ShipInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Salvage Crew/Assets/Scripts/Data Management/SaveData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Ascend/Games Programmin/Assets/Assignment/Scripts/Water.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Ascend/Games Programmin/Assets/Assignment/Scripts/MeshGen.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -61,6 +66,9 @@
       <workItem from="1708877953276" duration="9764000" />
       <workItem from="1708892723153" duration="2564000" />
       <workItem from="1711466582143" duration="7988000" />
+      <workItem from="1713662050453" duration="637000" />
+      <workItem from="1713700647723" duration="3837000" />
+      <workItem from="1714488787516" duration="8474000" />
     </task>
     <servers />
   </component>

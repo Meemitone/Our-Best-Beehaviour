@@ -4,13 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public struct worldGenSettings
+{
+    [Header("Setup")]
+    public int groundSize; // = 100;
+    public float groundVerticeSeperation; // = 2f;
+    public float groundWaveHeightScale; // = 0.9f;
+    
+    [Header("Decoration Setup")] 
+    public int smallDecor; // = 30;
+    public int largeDecor; // = 15;
+}
+
 public class WorldGenerator : MonoBehaviour
 {
+    public worldGenSettings settings;
 
-    [SerializeField] private int groundSize = 100;
-    [SerializeField] private float groundVerticeSeperation = 2f;
-    [SerializeField] private float groundWaveHeightScale = 0.9f;
-
+    [Header("References")]
     [SerializeField] private GameObject ground;
     
     [SerializeField] private GameObject[] smallDecorationPrefabs;
@@ -18,13 +28,19 @@ public class WorldGenerator : MonoBehaviour
 
     [SerializeField] private GameObject[] plantPrefabs;
     [SerializeField] private GameObject[] beeHivePrefabs;
-    
+
     private void Awake()
     {
-        GenerateGround();
-        placePlants();
+        FindObjectOfType<ControlPanel>().WorldGenerator = this;
+        FindObjectOfType<ControlPanel>().SetWorldGenValues();
     }
 
+    public void GenerateWorld()
+    {
+        GenerateGround();
+        PlacePlants();
+        PlaceDecor();
+    }
 
     private void GenerateGround()
     {
@@ -32,21 +48,21 @@ public class WorldGenerator : MonoBehaviour
         
         int index = 0;
         
-        Vector3[] vertices = new Vector3[groundSize * groundSize];
-        Vector3[] normals = new Vector3[groundSize * groundSize];
+        Vector3[] vertices = new Vector3[settings.groundSize * settings.groundSize];
+        Vector3[] normals = new Vector3[settings.groundSize * settings.groundSize];
 
-        for (int i = 0; i < groundSize; i++)
+        for (int i = 0; i < settings.groundSize; i++)
         {
-            for (int j = 0; j < groundSize; j++)
+            for (int j = 0; j < settings.groundSize; j++)
             {
                 float x = (float)i + 0.1f;
                 float y = (float)j + 0.1f;
                 
                 vertices[index] = new Vector3
                 (
-                    groundVerticeSeperation * i - groundVerticeSeperation * groundSize / 2,
-                    (Mathf.PerlinNoise((float)x, (float)y) * groundWaveHeightScale) - groundWaveHeightScale / 2,
-                    groundVerticeSeperation * j - groundVerticeSeperation * groundSize/2
+                    settings.groundVerticeSeperation * i - settings.groundVerticeSeperation * settings.groundSize / 2,
+                    (Mathf.PerlinNoise((float)x, (float)y) * settings.groundWaveHeightScale) - settings.groundWaveHeightScale / 2,
+                    settings.groundVerticeSeperation * j - settings.groundVerticeSeperation * settings.groundSize/2
                 );
                 
                 normals[index] = Vector3.up;
@@ -60,17 +76,17 @@ public class WorldGenerator : MonoBehaviour
 
         List<int> triangles = new List<int>();
 
-        for (int i = 0; i < groundSize - 1; i++)
+        for (int i = 0; i < settings.groundSize - 1; i++)
         {
-            for (int j = 0; j < groundSize - 1; j++)
+            for (int j = 0; j < settings.groundSize - 1; j++)
             {
-                triangles.Add(i*groundSize + j);
-                triangles.Add(i*groundSize + j + 1);
-                triangles.Add(i*groundSize + groundSize + j);
+                triangles.Add(i*settings.groundSize + j);
+                triangles.Add(i*settings.groundSize + j + 1);
+                triangles.Add(i*settings.groundSize + settings.groundSize + j);
                 
-                triangles.Add(i*groundSize + groundSize + j);
-                triangles.Add(i*groundSize + j + 1);
-                triangles.Add(i*groundSize + groundSize + j + 1);
+                triangles.Add(i*settings.groundSize + settings.groundSize + j);
+                triangles.Add(i*settings.groundSize + j + 1);
+                triangles.Add(i*settings.groundSize + settings.groundSize + j + 1);
             }
         }
 
@@ -78,16 +94,22 @@ public class WorldGenerator : MonoBehaviour
         
         mesh.RecalculateNormals();
 
+        if (ground == null)
+        {
+            Debug.LogError("Ground not assigned");
+            return;
+        }
+        
         ground.GetComponent<MeshFilter>().mesh = mesh;
         ground.GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
-    private void placePlants()
+    private void PlacePlants()
     {
         for (int i = 0; i < 20; i++)
         {
-            Vector3 randomPos = new Vector3(Random.Range(-groundSize/2 * groundVerticeSeperation, groundSize/2 * groundVerticeSeperation),
-                    100, Random.Range(-groundSize/2 * groundVerticeSeperation, groundSize/2 * groundVerticeSeperation));
+            Vector3 randomPos = new Vector3(Random.Range(-settings.groundSize/2 * settings.groundVerticeSeperation, settings.groundSize/2 * settings.groundVerticeSeperation),
+                    100, Random.Range(-settings.groundSize/2 * settings.groundVerticeSeperation, settings.groundSize/2 * settings.groundVerticeSeperation));
 
             //randomPos = new Vector3(Random.Range(0, 10f), 20, Random.Range(0, 10f));
             
@@ -98,6 +120,39 @@ public class WorldGenerator : MonoBehaviour
             else
             {
                 print("No floor hit");
+            }
+        }
+    }
+
+    private void PlaceDecor()
+    {
+        for (int i = 0; i < settings.smallDecor; i++)
+        {
+            Vector3 randomPos = new Vector3
+            (
+                Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation), 
+                100, 
+                Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation)
+            );
+            
+            if (Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit))
+            {
+                Instantiate(smallDecorationPrefabs[Random.Range(0, smallDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity);
+            }
+        }
+
+        for (int i = 0; i < settings.largeDecor; i++)
+        {
+            Vector3 randomPos = new Vector3
+            (
+                Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation), 
+                100, 
+                Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation)
+            );
+            
+            if (Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit))
+            {
+                Instantiate(largeDecorationPrefabs[Random.Range(0, largeDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity);
             }
         }
     }
