@@ -23,6 +23,7 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] private Slider groundHeight;
     [SerializeField] private Slider smallDecor;
     [SerializeField] private Slider largeDecor;
+    [SerializeField] private Slider hiveCount;
     
     public WorldGenerator WorldGenerator;
     private worldGenSettings Settings = new worldGenSettings();
@@ -52,6 +53,8 @@ public class ControlPanel : MonoBehaviour
 
         Settings.smallDecor = Mathf.RoundToInt(smallDecor.value);
         Settings.largeDecor = Mathf.RoundToInt(largeDecor.value);
+
+        Settings.hiveCount = Mathf.RoundToInt(hiveCount.value);
 
         WorldGenerator.settings = Settings;
     }

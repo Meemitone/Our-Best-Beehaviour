@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,6 +11,7 @@ public struct worldGenSettings
     public int groundSize; // = 100;
     public float groundVerticeSeperation; // = 2f;
     public float groundWaveHeightScale; // = 0.9f;
+    public int hiveCount; // = 3;
     
     [Header("Decoration Setup")] 
     public int smallDecor; // = 30;
@@ -27,7 +29,7 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private GameObject[] largeDecorationPrefabs;
 
     [SerializeField] private GameObject[] plantPrefabs;
-    [SerializeField] private GameObject[] beeHivePrefabs;
+    [SerializeField] private GameObject beeHivePrefab;
 
     private void Awake()
     {
@@ -40,6 +42,7 @@ public class WorldGenerator : MonoBehaviour
         GenerateGround();
         PlacePlants();
         PlaceDecor();
+        PlaceHives();
     }
 
     private void GenerateGround()
@@ -106,54 +109,66 @@ public class WorldGenerator : MonoBehaviour
 
     private void PlacePlants()
     {
+        GameObject newParent = new GameObject();
+        newParent.name = "Plants";
+        
         for (int i = 0; i < 20; i++)
         {
-            Vector3 randomPos = new Vector3(Random.Range(-settings.groundSize/2 * settings.groundVerticeSeperation, settings.groundSize/2 * settings.groundVerticeSeperation),
-                    100, Random.Range(-settings.groundSize/2 * settings.groundVerticeSeperation, settings.groundSize/2 * settings.groundVerticeSeperation));
-
-            //randomPos = new Vector3(Random.Range(0, 10f), 20, Random.Range(0, 10f));
-            
-            if (Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit))
+            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit))
             {
-                Instantiate(plantPrefabs[Random.Range(0, plantPrefabs.Length - 1)], hit.point, Quaternion.identity);
-            }
-            else
-            {
-                print("No floor hit");
+                Instantiate(plantPrefabs[Random.Range(0, plantPrefabs.Length - 1)], hit.point, Quaternion.identity, newParent.transform);
             }
         }
     }
 
     private void PlaceDecor()
     {
+        GameObject newParent = new GameObject();
+        newParent.name = "Small Decor";
+        
         for (int i = 0; i < settings.smallDecor; i++)
         {
-            Vector3 randomPos = new Vector3
-            (
-                Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation), 
-                100, 
-                Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation)
-            );
-            
-            if (Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit))
+            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit))
             {
-                Instantiate(smallDecorationPrefabs[Random.Range(0, smallDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity);
+                Instantiate(smallDecorationPrefabs[Random.Range(0, smallDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity ,newParent.transform);
             }
         }
+        
+        newParent = new GameObject();
+        newParent.name = "Large Decor";
 
         for (int i = 0; i < settings.largeDecor; i++)
         {
-            Vector3 randomPos = new Vector3
-            (
-                Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation), 
-                100, 
-                Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation)
-            );
+           
             
-            if (Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit))
+            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit))
             {
-                Instantiate(largeDecorationPrefabs[Random.Range(0, largeDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity);
+                Instantiate(largeDecorationPrefabs[Random.Range(0, largeDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity ,newParent.transform);
             }
         }
+    }
+
+    private void PlaceHives()
+    {
+        GameObject newParent = new GameObject();
+        newParent.name = "Hives";
+        
+        for (int i = 0; i < settings.hiveCount; i++)
+        {
+            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit))
+            {
+                Instantiate(beeHivePrefab, hit.point, quaternion.identity, newParent.transform);
+            }
+        }
+    }
+
+    private Vector3 randomPos()
+    {
+        return new Vector3
+        (
+            Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation), 
+            100, 
+            Random.Range(-settings.groundSize/2.1f * settings.groundVerticeSeperation, settings.groundSize/2.1f * settings.groundVerticeSeperation)
+        );
     }
 }
