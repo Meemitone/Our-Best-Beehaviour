@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2339177947705744359}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours: []
-  beeBoids: []
+  objectsInBox: []
 --- !u!33 &6577773989419209655
 MeshFilter:
   m_ObjectHideFlags: 0
