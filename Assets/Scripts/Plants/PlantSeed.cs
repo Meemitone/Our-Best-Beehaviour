@@ -11,7 +11,7 @@ public class PlantSeed : MonoBehaviour
     [Header("")]
     public float energy;
     private float energyInterval = 1f;
-    [SerializeField] FlowerData genetics;
+    [SerializeField] public FlowerData genetics;
     [SerializeField] Rigidbody myRB;
     [SerializeField] GameObject model;
     public bool debugMutate = false;
@@ -133,6 +133,7 @@ public class PlantSeed : MonoBehaviour
                     {
                         GameObject newFlower = Instantiate(Flower, currentSegment.nextPivot.transform);
                         newFlower.GetComponent<Flower>().myGenes = genetics;
+                        newFlower.GetComponent<Flower>().mySeed = this;
                         parts.Add(newFlower.GetComponent<PlantPart>());
                         yield return StartCoroutine(newFlower.GetComponent<PlantPart>().Grow());
                         yield break;

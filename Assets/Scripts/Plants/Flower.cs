@@ -5,12 +5,15 @@ using UnityEngine;
 public class Flower : PlantPart
 {
     [SerializeField] GameObject[] seedPoints;
+    public GameObject seedPrefab;
     public float pollen = 0f;
     private float pollenLimit = 1f;
     public FlowerData myGenes;
     public List<FlowerData> collectedGenes;
     private Coroutine currentBehaviour;
+    public PlantSeed mySeed;
 
+    public bool OverrideBehaviour = false;
     public override IEnumerator Grow()
     {
         yield return base.Grow();
@@ -58,6 +61,23 @@ public class Flower : PlantPart
 
     private IEnumerator Seeding()
     {
+        foreach(GameObject point in seedPoints)
+        {
+            GameObject seed = Instantiate(seedPrefab, point.transform.position, point.transform.rotation, null);
+            int geneticsPassed = Random.Range(0, collectedGenes.Count);
+            seed.GetComponent<PlantSeed>().genetics = FlowerData.Copy(collectedGenes[geneticsPassed], mySeed.energy/seedPoints.Length);
+        }
         yield break;
+    }
+
+    internal override void Update()
+    {
+        base.Update();
+        if(OverrideBehaviour)
+        {
+            OverrideBehaviour = false;
+            StopCoroutine(Pollenate());
+            StartCoroutine(Seeding());
+        }
     }
 }

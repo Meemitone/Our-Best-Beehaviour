@@ -155,6 +155,9 @@ MonoBehaviour:
   - {fileID: 696478423592973468}
   - {fileID: 8719748617069904323}
   - {fileID: 1602977764488120597}
+  seedPrefab: {fileID: 7336448816156643275, guid: 05e67042f5ca8914896ae1c8ce608696,
+    type: 3}
+  pollen: 0
   myGenes:
     geneCode: SSSLLLSF
     growRate: 0.1
@@ -163,6 +166,9 @@ MonoBehaviour:
     leafSize: 1
     seedCount: 3
     energy: 7
+  collectedGenes: []
+  mySeed: {fileID: 0}
+  OverrideBehaviour: 0
 --- !u!1 &3477093779665331070
 GameObject:
   m_ObjectHideFlags: 0
