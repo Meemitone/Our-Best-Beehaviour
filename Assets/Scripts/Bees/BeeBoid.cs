@@ -12,6 +12,14 @@ public class BeeBoid : BoidBasic
 
     public float turnMax;
 
+    public float polenHeld;
+
+    public float maxPolenHold;
+
+    public FlowerData flowData;
+
+    public Transform homeHive;
+
     private void FixedUpdate()
     {
 

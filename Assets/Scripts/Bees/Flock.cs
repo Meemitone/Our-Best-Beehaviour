@@ -6,7 +6,13 @@ using System;
 public class Flock : Behaviour
 {
 
-    [SerializeField] float goldenRatio = 2f;
+    [SerializeField] float minimumDistance = 1f;
+
+    private List<BeeBoid> myBois = new();
+
+    
+
+    /*[SerializeField] float goldenRatio = 2f;
 
     private Box currentBox;
 
@@ -19,7 +25,7 @@ public class Flock : Behaviour
 
         foreach (Transform bee in currentBox.objectsInBox)
         {
-            if (bee.tag == gameObject.tag)
+            if (bee.tag == gameObject.tag && bee != transform)
             {
 
                 float distance = Vector3.Distance(transform.position, bee.position);
@@ -43,7 +49,7 @@ public class Flock : Behaviour
             {
                 foreach (Transform bee in box.objectsInBox)
                 {
-                    if (bee.tag == gameObject.tag)
+                    if (bee.tag == gameObject.tag && bee != transform)
                     {
 
                         float distance = Vector3.Distance(transform.position, bee.position);
@@ -66,5 +72,5 @@ public class Flock : Behaviour
 
         return calForce;
     }
-
+    */
 }
