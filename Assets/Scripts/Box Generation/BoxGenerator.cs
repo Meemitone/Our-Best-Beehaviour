@@ -13,7 +13,7 @@ public class BoxGenerator : MonoBehaviour
     [SerializeField] List<Box> boxes = new List<Box>();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Vector3 positionMath = transform.position + new Vector3(-(numberOnAxis.x/2) * scale, 0, -(numberOnAxis.y / 2) * scale);
 

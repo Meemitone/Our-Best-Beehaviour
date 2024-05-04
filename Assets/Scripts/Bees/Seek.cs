@@ -10,7 +10,7 @@ public class Seek : Behaviour
 
     bool checkFlower = true;
 
-    [SerializeField] float timeBetweenChecks = 0.5f;
+    [SerializeField] float timeBetweenChecks = 1f;
 
     Vector3 calForce = new();
     public override Vector3 CalculateForce()
@@ -83,6 +83,10 @@ public class Seek : Behaviour
             StartCoroutine(CheckAgain());
 
         }
+
+        if (tarFlower != null && !tarFlower.GetComponent<BeeInteraction>().takenByBee
+            && GetComponent<Arrive>().stopRange >= Vector3.Distance(tarFlower.position, transform.position))
+            GetComponent<Arrive>().BeginArrive(tarFlower);
 
         return calForce;
     }
