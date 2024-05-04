@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 70407072}
   - component: {fileID: 70407071}
   - component: {fileID: 70407074}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -788,6 +788,7 @@ MonoBehaviour:
   windXOffsetDelta: {x: 2, y: 2}
   windZOffsetDelta: {x: -2, y: -2}
   windAreaScale: 0.03
+  sunRotateDPS: 1
 --- !u!114 &191096218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1683,7 +1684,7 @@ MonoBehaviour:
   - {fileID: 6353920972517449672, guid: c7a37164b8af17e40a258c1d0778dd4c, type: 3}
   - {fileID: 4794357701760897477, guid: 7c8af46c058cbb4449f03b30c42afabd, type: 3}
   plantPrefabs:
-  - {fileID: 7336448816156643275, guid: 05e67042f5ca8914896ae1c8ce608696, type: 3}
+  - {fileID: 2421845518327732281, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7, type: 3}
   beeHivePrefab: {fileID: 2106237714160533104, guid: 5f05439efb05a89488bfe6041b3525e9,
     type: 3}
 --- !u!1 &709712057
