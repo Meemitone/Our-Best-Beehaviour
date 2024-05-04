@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7336448816156643277}
   - component: {fileID: 7336448816156643276}
   - component: {fileID: 7336448816156643278}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlantSeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   Segment: {fileID: 2243724424650197838, guid: 72c059d0c4ee7e54ba13860e1b397272, type: 3}
   Leaf: {fileID: 5514839878220612982, guid: 4c9b98da0cf39b549b5c8fb5b5bace98, type: 3}
   Flower: {fileID: 3477093778837364505, guid: 08c124beccd137d46b81a7b8ca1bcb17, type: 3}
-  energy: 0
+  energy: 100
   genetics:
     geneCode: SSSLLLLLLSSLLSSLSSSF
     growRate: 0.1
@@ -155,7 +155,7 @@ MonoBehaviour:
     segmentSizeRatio: 0.99
     leafSize: 1
     seedCount: 3
-    energy: 7
+    energy: 3
   myRB: {fileID: 7336448816156643278}
   model: {fileID: 7336448814927960047}
   debugMutate: 0

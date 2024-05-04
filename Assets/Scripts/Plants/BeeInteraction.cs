@@ -34,8 +34,10 @@ public class BeeInteraction : MonoBehaviour
                 boxDis = Vector3.Distance(box.transform.position, transform.position);
             }
         }
-
-        nearestBox.objectsInBox.Add(transform);
+        if (nearestBox != null)
+        {
+            nearestBox.objectsInBox.Add(transform);
+        }
 
     }
 

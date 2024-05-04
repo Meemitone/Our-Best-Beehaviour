@@ -334,7 +334,7 @@ MonoBehaviour:
   startScale: 0.01
   growthRate: 1
   maxScale: 1
-  growCostScale: 1
+  growCostScale: 1.5
   isGrowing: 1
   upkeepCostScale: 1
   center: {fileID: 3734755807868435527}
@@ -345,11 +345,11 @@ MonoBehaviour:
   - {fileID: 2979215096526966830}
   - {fileID: 1021249149432020155}
   - {fileID: 882219116591957444}
-  maxCastDist: 10
-  debug: 1
+  maxCastDist: 30
+  debug: 0
   debugPrint: 0
   ratioDisplay: 0
-  baseLeafEnergyGen: 1
+  baseLeafEnergyGen: 4
 --- !u!1 &7274791893016456563
 GameObject:
   m_ObjectHideFlags: 0

@@ -214,9 +214,9 @@ MonoBehaviour:
   startScale: 0.01
   growthRate: 1
   maxScale: 1
-  growCostScale: 1
+  growCostScale: 1.5
   isGrowing: 1
-  upkeepCostScale: 0
+  upkeepCostScale: 1
   nextPivot: {fileID: 1833831675110392490}
   otherPivot: {fileID: 5054037106220111400}
   nextStalk: {fileID: 0}
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
-  weight: 0.5
+  weight: 1
 --- !u!1 &5054037106220111400
 GameObject:
   m_ObjectHideFlags: 0

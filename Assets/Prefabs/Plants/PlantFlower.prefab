@@ -149,7 +149,7 @@ MonoBehaviour:
   startScale: 0.01
   growthRate: 1
   maxScale: 1
-  growCostScale: 1
+  growCostScale: 2
   isGrowing: 1
   upkeepCostScale: 1
   seedPoints:

@@ -8,14 +8,14 @@ public abstract class PlantPart : MonoBehaviour //Abstract means that this shoul
     [SerializeField] internal float startScale = 0.01f;
     [SerializeField] internal float growthRate = 1f;
     [SerializeField] internal float maxScale = 1f;
-    [SerializeField] internal float growCostScale = 1f;
+    [SerializeField] internal float growCostScale = 1.5f;
     [SerializeField] internal bool isGrowing = true;
 
     [SerializeField] internal float upkeepCostScale = 1f; //base cost of a scale 1 object per second
 
     public virtual float GetUpkeep()//A virtual has a default implementation, but can be overriden by an inheriting class
     {
-        float cost = -upkeepCostScale * linearScale * Time.deltaTime * (isGrowing ? growCostScale: 1f);
+        float cost = upkeepCostScale * linearScale * Time.deltaTime * (isGrowing ? growCostScale: 1f);
         //should be negative unless leaf makes energy
         return cost;
     }
@@ -54,4 +54,20 @@ public abstract class PlantPart : MonoBehaviour //Abstract means that this shoul
             yield return null;
         }
     }
+
+    public virtual IEnumerator Ungrow()
+    {
+        while (linearScale > startScale)
+        {
+            linearScale -= growthRate * Time.deltaTime;
+            if (linearScale <= startScale)
+            {
+                linearScale = startScale;
+            }
+            transform.localScale = new Vector3(1, 1, 1) * linearScale;
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+
 }

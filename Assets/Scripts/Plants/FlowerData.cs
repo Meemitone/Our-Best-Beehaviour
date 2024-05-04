@@ -190,9 +190,9 @@ public class FlowerData
         */
     }
 
-    private static String PlantGeneticsConstraintSolver(String Code)
+    public static string PlantGeneticsConstraintSolver(string Code)
     {
-        String FinalCode = Code;
+        string FinalCode = Code;
         int Stalkcount = 0;
         for(int i = 0; i < Code.Length; i++)
         {

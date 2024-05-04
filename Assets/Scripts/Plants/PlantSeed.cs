@@ -10,13 +10,15 @@ public class PlantSeed : MonoBehaviour
     [SerializeField] GameObject Flower;
     [Header("")]
     public float energy;
-    private float energyInterval = 1f;
+    private float energyInterval = 0.5f;
     [SerializeField] public FlowerData genetics;
     [SerializeField] Rigidbody myRB;
     [SerializeField] GameObject model;
     public bool debugMutate = false;
     List<int> LeafPivots;
     public List<PlantPart> parts;
+    Coroutine currentGrow;
+    private bool isDying = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +27,13 @@ public class PlantSeed : MonoBehaviour
         LeafPivots = new List<int>();
         for (int j = 0; j < 6; j++)
             LeafPivots.Add(j);
+        StartCoroutine(Energy());
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(myRB!=null && transform.position.y < 2f && myRB.velocity.sqrMagnitude < 0.01f)
+        if (myRB != null && transform.position.y < 2f && myRB.velocity.sqrMagnitude < 0.01f)
         {
             model.transform.localRotation = transform.rotation;
             transform.rotation = Quaternion.identity;
@@ -48,25 +51,35 @@ public class PlantSeed : MonoBehaviour
         }
     }
 
-    IEnumerator Die()
+    public IEnumerator Die()
     {
-        StopAllCoroutines();
+        if (isDying)
+            yield break;
+        isDying = true;
+        if (currentGrow != null)
+            StopCoroutine(currentGrow);
+        StopCoroutine(GrowPlant());
+        for (int i = parts.Count - 1; i >= 0; i--)
+        {
+            yield return StartCoroutine(parts[i].Ungrow());
+            parts.RemoveAt(i);
+        }
         Destroy(gameObject);
         yield return null;
     }
 
     IEnumerator Energy()
     {
-        yield return new WaitForSeconds(Random.Range(0,1f));
-        while(true)
+        yield return new WaitForSeconds(Random.Range(0, 1f));
+        while (true)
         {
             float cost = 0f;
-            foreach(PlantPart part in parts)
+            foreach (PlantPart part in parts)
             {
                 cost += part.GetUpkeep();
             }
             energy -= cost;
-            if(energy <= 0)
+            if (energy <= 0)
             {
                 StartCoroutine(Die());
                 yield break;
@@ -75,21 +88,23 @@ public class PlantSeed : MonoBehaviour
         }
     }
 
+
     IEnumerator GrowPlant()
     {
         Stalk currentSegment = null;
-        for(int i = 0; i < genetics.geneCode.Length; i++)
+        for (int i = 0; i < genetics.geneCode.Length; i++)
         {
             char GeneLetter = genetics.geneCode[i];
-            switch(GeneLetter)
+            switch (GeneLetter)
             {
                 case 'S':
-                    if(currentSegment == null)
+                    if (currentSegment == null)
                     {
                         GameObject newSegment = Instantiate(Segment, transform);
                         currentSegment = newSegment.GetComponent<Stalk>();
                         parts.Add(newSegment.GetComponent<PlantPart>());
-                        yield return StartCoroutine(currentSegment.Grow());
+                        currentGrow = StartCoroutine(parts[parts.Count - 1].Grow());
+                        yield return currentGrow;
                     }
                     else
                     {
@@ -99,11 +114,12 @@ public class PlantSeed : MonoBehaviour
                         currentSegment = newSegment.GetComponent<Stalk>();
                         currentSegment.maxScale = previousMaxScale * genetics.segmentSizeRatio;
                         parts.Add(newSegment.GetComponent<PlantPart>());
-                        yield return StartCoroutine(currentSegment.Grow());
+                        currentGrow = StartCoroutine(parts[parts.Count - 1].Grow());
+                        yield return currentGrow;
                     }
                     break;
                 case 'L':
-                    if(currentSegment == null)
+                    if (currentSegment == null)
                     {
                         //Debug.LogWarning("PlantGenetics Should not start with 'L'");
                     }
@@ -112,12 +128,13 @@ public class PlantSeed : MonoBehaviour
                         ShuffleIntList(LeafPivots);
                         foreach (int p in LeafPivots)
                         {
-                            if(currentSegment.otherPivot.transform.GetChild(p).childCount == 0)
+                            if (currentSegment.otherPivot.transform.GetChild(p).childCount == 0)
                             {
                                 GameObject target = currentSegment.otherPivot.transform.GetChild(p).gameObject;
                                 GameObject newLeaf = Instantiate(Leaf, target.transform);
                                 parts.Add(newLeaf.GetComponent<PlantPart>());
-                                yield return StartCoroutine(newLeaf.GetComponent<PlantPart>().Grow());
+                                currentGrow = StartCoroutine(parts[parts.Count - 1].Grow());
+                                yield return currentGrow;
                                 break;
                             }
                         }
@@ -135,7 +152,8 @@ public class PlantSeed : MonoBehaviour
                         newFlower.GetComponent<Flower>().myGenes = genetics;
                         newFlower.GetComponent<Flower>().mySeed = this;
                         parts.Add(newFlower.GetComponent<PlantPart>());
-                        yield return StartCoroutine(newFlower.GetComponent<PlantPart>().Grow());
+                        currentGrow = StartCoroutine(parts[parts.Count - 1].Grow());
+                        yield return currentGrow;
                         yield break;
                     }
                 default:
@@ -145,6 +163,7 @@ public class PlantSeed : MonoBehaviour
         }
         yield break;
     }
+
 
 
     private void ShuffleIntList(List<int> inputList)

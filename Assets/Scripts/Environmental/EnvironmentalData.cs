@@ -8,6 +8,7 @@ public class EnvironmentalData : MonoBehaviour
     [SerializeField] private Vector2 windXOffset, windZOffset;
     [SerializeField] private Vector2 windXOffsetDelta, windZOffsetDelta;
     [SerializeField] float windAreaScale;
+    [SerializeField] float sunRotateDPS = 1f;
 
     public static EnvironmentalData Instance
     {
@@ -66,6 +67,8 @@ public class EnvironmentalData : MonoBehaviour
     {
         windXOffset += windXOffsetDelta * Time.deltaTime;
         windZOffset += windZOffsetDelta * Time.deltaTime;
+        Vector3 tempRot = transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.AngleAxis(sunRotateDPS*Time.deltaTime, Vector3.up) * transform.rotation;
     }
 
     internal Vector3 GetWind(Vector3 pos)

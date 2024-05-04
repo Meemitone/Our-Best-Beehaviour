@@ -25,9 +25,19 @@ public class Flower : PlantPart
 
     private IEnumerator Pollenate()
     {
-        yield return null;
-        pollen += Time.deltaTime * 0.05f;
-        pollen = Mathf.Min(pollen, pollenLimit);
+        float timer = 0;
+        while (true)
+        {
+            yield return null;
+            pollen += Time.deltaTime * 0.05f;
+            pollen = Mathf.Min(pollen, pollenLimit);
+            timer += Time.deltaTime;
+            if(timer > 50f)
+            {
+                OverrideBehaviour = true;
+                yield break;
+            }
+        }
     }
 
     public float TakePollen(float max, ref FlowerData mostRecent)
@@ -61,12 +71,15 @@ public class Flower : PlantPart
 
     private IEnumerator Seeding()
     {
+        yield return new WaitForSeconds(5f);
         foreach(GameObject point in seedPoints)
         {
             GameObject seed = Instantiate(seedPrefab, point.transform.position, point.transform.rotation, null);
             int geneticsPassed = Random.Range(0, collectedGenes.Count);
-            seed.GetComponent<PlantSeed>().genetics = FlowerData.Copy(collectedGenes[geneticsPassed], mySeed.energy/seedPoints.Length);
+            seed.GetComponent<PlantSeed>().genetics = FlowerData.Copy(collectedGenes[geneticsPassed], Mathf.Max(mySeed.energy/seedPoints.Length, 1.5f));
+            seed.GetComponent<Rigidbody>().AddExplosionForce(Random.Range(5f,10f), point.transform.parent.position, 5f, Random.Range(1f,3f), ForceMode.VelocityChange);
         }
+        mySeed.StartCoroutine(mySeed.Die());
         yield break;
     }
 

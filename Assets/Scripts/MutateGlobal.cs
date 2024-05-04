@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MutateGlobal : MonoBehaviour
 {
-    static MutateGlobal instance;
+    public static MutateGlobal instance;
 
     [SerializeField] internal float plantMutateChance, 
         //these three are for specifically changing the growth structure

@@ -29,7 +29,7 @@ public class Leaf : PlantPart
     public override float GetUpkeep()
     {
         ratioDisplay = GetLightRatio();
-        float Generated = ratioDisplay * baseLeafEnergyGen * linearScale * Time.deltaTime;
+        float Generated = -ratioDisplay * baseLeafEnergyGen * linearScale * Time.deltaTime;
 
         float BaseUpkeep = base.GetUpkeep();
         return BaseUpkeep + Generated;
