@@ -19,7 +19,7 @@ public class PlantSeed : MonoBehaviour
     public List<PlantPart> parts;
     Coroutine currentGrow;
     private bool isDying = false;
-
+    public int Generation = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +39,11 @@ public class PlantSeed : MonoBehaviour
             transform.rotation = Quaternion.identity;
             StartCoroutine(GrowPlant());
             Destroy(myRB);
+        }
+
+        if(myRB!=null && transform.position.y < -10f)
+        {
+            Destroy(gameObject);
         }
 
         if (debugMutate)

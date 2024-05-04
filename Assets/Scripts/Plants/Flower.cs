@@ -12,7 +12,7 @@ public class Flower : PlantPart
     public List<FlowerData> collectedGenes;
     private Coroutine currentBehaviour;
     public PlantSeed mySeed;
-
+    public bool repAfterTime = false;
     public bool OverrideBehaviour = false;
     public override IEnumerator Grow()
     {
@@ -31,8 +31,9 @@ public class Flower : PlantPart
             yield return null;
             pollen += Time.deltaTime * 0.05f;
             pollen = Mathf.Min(pollen, pollenLimit);
-            timer += Time.deltaTime;
-            if(timer > 50f)
+            if (repAfterTime)
+                timer += Time.deltaTime;
+            if (timer > 50f)
             {
                 OverrideBehaviour = true;
                 yield break;
@@ -43,12 +44,12 @@ public class Flower : PlantPart
     public float TakePollen(float max, ref FlowerData mostRecent)
     {
         float retVal = pollen;
-        if (mostRecent !=null)
+        if (mostRecent != null)
         {
             collectedGenes.Add(FlowerData.Copy(mostRecent, 0, false));
         }
         mostRecent = myGenes;
-        if(max > pollen)
+        if (max > pollen)
         {
             retVal = pollen;
             pollen = 0;
@@ -59,7 +60,7 @@ public class Flower : PlantPart
             retVal = max;
         }
 
-        if(collectedGenes.Count > 5)
+        if (collectedGenes.Count > 5)
         {
             pollen = 0;
             StopCoroutine(currentBehaviour);
@@ -72,12 +73,15 @@ public class Flower : PlantPart
     private IEnumerator Seeding()
     {
         yield return new WaitForSeconds(5f);
-        foreach(GameObject point in seedPoints)
+        foreach (GameObject point in seedPoints)
         {
             GameObject seed = Instantiate(seedPrefab, point.transform.position, point.transform.rotation, null);
             int geneticsPassed = Random.Range(0, collectedGenes.Count);
-            seed.GetComponent<PlantSeed>().genetics = FlowerData.Copy(collectedGenes[geneticsPassed], Mathf.Max(mySeed.energy/seedPoints.Length, 1.5f));
-            seed.GetComponent<Rigidbody>().AddExplosionForce(Random.Range(5f,10f), point.transform.parent.position, 5f, Random.Range(1f,3f), ForceMode.VelocityChange);
+            seed.GetComponent<PlantSeed>().genetics = FlowerData.Copy(collectedGenes[geneticsPassed], Mathf.Max(mySeed.energy / seedPoints.Length, 1f));
+            seed.GetComponent<Rigidbody>().AddExplosionForce(Random.Range(5f, 10f), point.transform.parent.position, 5f, Random.Range(1f, 3f), ForceMode.VelocityChange);
+            seed.GetComponent<PlantSeed>().Generation = mySeed.Generation + 1;
+            seed.name = "Generation " + seed.GetComponent<PlantSeed>().Generation;
+            seed.transform.parent = mySeed.transform.parent;
         }
         mySeed.StartCoroutine(mySeed.Die());
         yield break;
@@ -86,7 +90,7 @@ public class Flower : PlantPart
     internal override void Update()
     {
         base.Update();
-        if(OverrideBehaviour)
+        if (OverrideBehaviour)
         {
             OverrideBehaviour = false;
             StopCoroutine(Pollenate());

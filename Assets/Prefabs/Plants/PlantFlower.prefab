@@ -169,6 +169,7 @@ MonoBehaviour:
     energy: 7
   collectedGenes: []
   mySeed: {fileID: 0}
+  repAfterTime: 0
   OverrideBehaviour: 0
 --- !u!114 &198348184775812836
 MonoBehaviour:
