@@ -30,7 +30,7 @@ public class Wander : Behaviour
     {
         if (resetWander)
         {
-            nextCalForce = (currentCalForce + new Vector3(Random.Range(-wanderAmount, wanderAmount), 0, Random.Range(-wanderAmount, wanderAmount))) * weight;
+            nextCalForce = (transform.forward + new Vector3(Random.Range(-wanderAmount, wanderAmount), Random.Range(-0.2f, 0.2f) - transform.forward.y, Random.Range(-wanderAmount, wanderAmount))) * weight;
             nextCalForce = Vector3.ClampMagnitude(nextCalForce, weight);
             currentTime = 0;
             StartCoroutine(ResetWander());
@@ -38,7 +38,7 @@ public class Wander : Behaviour
 
         currentTime += Time.deltaTime;
 
-        currentCalForce = Vector3.Slerp(currentCalForce, nextCalForce, currentTime / resetTimer);
+        currentCalForce = Vector3.Lerp(currentCalForce, nextCalForce, currentTime / resetTimer);
 
         return currentCalForce;
     }

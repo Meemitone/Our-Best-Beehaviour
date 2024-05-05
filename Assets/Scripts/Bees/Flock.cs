@@ -6,11 +6,128 @@ using System;
 public class Flock : Behaviour
 {
 
-    [SerializeField] float minimumDistance = 1f;
+    [SerializeField] float minDistance = 1f;
 
-    private List<BeeBoid> myBois = new();
+    [SerializeField] float maxDistance = 5f;
 
-    
+    [SerializeField] float pushAway = 2f;
+
+    struct BeeBoi
+    {
+        public BeeBoid beeBody;
+        public float beeDis;
+        public Vector3 beeDir;
+    }
+
+    private List<BeeBoi> myBois = new();
+
+    private bool beecheck = true;
+
+    [SerializeField] int numOfB = 3;
+    [SerializeField] float timeForCheck = 1f;
+
+    private BeeBoid beeBody;
+
+    Vector3 calForce = new();
+
+    private void Start()
+    {
+        beeBody = GetComponent<BeeBoid>();
+    }
+
+    public override Vector3 CalculateForce()
+    {
+
+        if (beecheck)
+        {
+
+            foreach (Transform bee in beeBody.currentBox.objectsInBox)
+            {
+
+                if (bee.tag == "Bee")
+                {
+                    BeeBoi curBee = new();
+
+                    curBee.beeDis = Vector3.Distance(transform.position, bee.position);
+                    if (curBee.beeDis < maxDistance)
+                    {
+
+                        curBee.beeDir = bee.position - transform.position;
+                        curBee.beeBody = bee.GetComponent<BeeBoid>();
+                        myBois.Add(curBee);
+
+                    }
+                }
+
+            }
+
+            if (myBois.Count < numOfB)
+            {
+                foreach (Box box in beeBody.currentBox.neighbours)
+                {
+                    foreach (Transform bee in box.objectsInBox)
+                    {
+
+                        if (bee.tag == "Bee")
+                        {
+                            BeeBoi curBee = new();
+
+                            curBee.beeDis = Vector3.Distance(transform.position, bee.position);
+                            if (curBee.beeDis < maxDistance)
+                            {
+
+                                curBee.beeDir = bee.position - transform.position;
+                                curBee.beeBody = bee.GetComponent<BeeBoid>();
+                                myBois.Add(curBee);
+
+                            }
+                        }
+
+                    }
+                }
+            }
+            List<BeeBoi> newBois = new();
+
+            int length = myBois.Count;
+
+            for(int i = 0; i < numOfB; i++)
+            {
+                BeeBoi cur = new();
+                foreach (BeeBoi boi in myBois)
+                {
+                    if (cur.beeDis == 0 && !newBois.Contains(boi))
+                        cur = boi;
+                    else if (cur.beeDis > boi.beeDis && !newBois.Contains(boi))
+                        cur = boi;
+                }
+                newBois.Add(cur);
+            }
+
+            myBois = newBois;
+
+            foreach(BeeBoi beeBoi in myBois)
+            {
+                calForce += beeBoi.beeBody.force;
+                if (beeBoi.beeDis < minDistance)
+                    calForce += beeBoi.beeDir * -pushAway;
+            }
+
+            calForce = Vector3.ClampMagnitude(calForce, weight);
+
+            beecheck = false;
+
+
+        }
+
+        return calForce;
+
+    }
+
+    private IEnumerator Recheck()
+    {
+        yield return new WaitForSeconds(timeForCheck);
+        beecheck = true;
+    }
 
     /*[SerializeField] float goldenRatio = 2f;
 
@@ -74,3 +191,5 @@ public class Flock : Behaviour
     }
     */
 }
+
+

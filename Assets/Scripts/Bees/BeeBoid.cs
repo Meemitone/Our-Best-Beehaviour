@@ -37,7 +37,7 @@ public class BeeBoid : BoidBasic
 
         currentDirection = Vector3.ClampMagnitude(currentDirection, curClamp);
 
-        transform.Translate(currentDirection * Time.deltaTime);
+        transform.position += currentDirection * Time.deltaTime;
 
     }
 
