@@ -13,7 +13,7 @@ public class HiveGeneticsManager : MonoBehaviour
     private int BeesToMake;
     public float[] Baybee = new float[5];
     private int Beemoved;
-    private GameObject Beefab;
+    [SerializeField] private GameObject Beefab;
     [SerializeField] private Vector3 Spawnpoint;
     private List<float[]> BA = new List<float[]>();
     
