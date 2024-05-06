@@ -236,6 +236,15 @@ MonoBehaviour:
     statBase: 2
     maxShift: 2
     isInt: 1
+  - name: Strength
+    statBase: 2
+    maxShift: 2
+    isInt: 1
+  - name: Life Expectancy
+    statBase: 60
+    maxShift: 120
+    isInt: 1
+  selfDistruct: 60
 --- !u!114 &5897078380245772638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +312,7 @@ MonoBehaviour:
   weight: 3
   stopRange: 3
   waitTime: 2
+  hiveRange: 1
 --- !u!114 &8820283460226604386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Benes:
+  - 0
   - 0
   - 0
   - 0

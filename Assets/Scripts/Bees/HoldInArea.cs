@@ -14,10 +14,8 @@ public class HoldInArea : Behaviour
     bool returning = false;
 
     private BeeBoid myBee;
-    private void Start()
+    private void Awake()
     {
-
-
         myBee = GetComponent<BeeBoid>();
         maxRange *= myBee.beeStats[2].statBase;
 

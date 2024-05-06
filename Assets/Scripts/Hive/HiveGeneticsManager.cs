@@ -18,8 +18,8 @@ public class HiveGeneticsManager : MonoBehaviour
     {
         for(int i = 0; i<3; i++)
         {
-            float[] tempCopy = new float[5];
-            for (int j = 0; j < 5; j++)
+            float[] tempCopy = new float[6];
+            for (int j = 0; j < 6; j++)
             {
                 tempCopy[j] = Random.Range(0f, 1f);
             }
@@ -32,7 +32,7 @@ public class HiveGeneticsManager : MonoBehaviour
 
         if (other.gameObject.CompareTag("Bee"))
         {
-            float[] tempCopy = new float[5];
+            float[] tempCopy = new float[6];
             other.GetComponent<BeeneticAlgorithm>().Benes.CopyTo(tempCopy, 0);
             BA.Add(tempCopy);
             Destroy(other.GameObject());

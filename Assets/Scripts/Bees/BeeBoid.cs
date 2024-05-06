@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class BeeBoid : BoidBasic
 {
 
-
     float acceleration = 2f;
 
     public Vector3 currentDirection;
@@ -22,6 +21,8 @@ public class BeeBoid : BoidBasic
     public Transform homeHive;
 
     public List<BeeStat> beeStats = new List<BeeStat>();
+
+    public float selfDistruct = 60;
 
     private void FixedUpdate()
     {
@@ -97,7 +98,10 @@ public class BeeBoid : BoidBasic
         }
 
         maxPolenHold = beeStats[4].statBase;
-     }
+
+        Box[] boxes = FindObjectsOfType<Box>();
+
+    }
 }
 
 [Serializable]
