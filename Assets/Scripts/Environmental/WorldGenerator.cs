@@ -31,6 +31,8 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private GameObject[] plantPrefabs;
     [SerializeField] private GameObject beeHivePrefab;
 
+    [SerializeField] private LayerMask groundLayer;
+
     private void Awake()
     {
         FindObjectOfType<ControlPanel>().WorldGenerator = this;
@@ -40,10 +42,12 @@ public class WorldGenerator : MonoBehaviour
     public void GenerateWorld()
     {
         GenerateGround();
+     
         PlacePlants();
         PlaceDecor();
-        PlaceHives();
         SetUpBoxes();
+        PlaceHives();
+
     }
 
     private void GenerateGround()
@@ -115,7 +119,7 @@ public class WorldGenerator : MonoBehaviour
         
         for (int i = 0; i < 20; i++)
         {
-            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit))
+            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit, groundLayer))
             {
                 Instantiate(plantPrefabs[Random.Range(0, plantPrefabs.Length - 1)], hit.point, Quaternion.identity, newParent.transform);
             }
@@ -129,7 +133,7 @@ public class WorldGenerator : MonoBehaviour
         
         for (int i = 0; i < settings.smallDecor; i++)
         {
-            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit))
+            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit, groundLayer))
             {
                 Instantiate(smallDecorationPrefabs[Random.Range(0, smallDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity ,newParent.transform);
             }
@@ -142,7 +146,7 @@ public class WorldGenerator : MonoBehaviour
         {
            
             
-            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit))
+            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit , groundLayer))
             {
                 Instantiate(largeDecorationPrefabs[Random.Range(0, largeDecorationPrefabs.Length - 1)], hit.point, Quaternion.identity ,newParent.transform);
             }
@@ -156,7 +160,7 @@ public class WorldGenerator : MonoBehaviour
         
         for (int i = 0; i < settings.hiveCount; i++)
         {
-            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit))
+            if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit, groundLayer))
             {
                 Instantiate(beeHivePrefab, hit.point, quaternion.identity, newParent.transform);
             }
@@ -165,7 +169,7 @@ public class WorldGenerator : MonoBehaviour
 
     private void SetUpBoxes()
     {
-        int scale = Mathf.RoundToInt(settings.groundVerticeSeperation);
+        int scale = Mathf.RoundToInt(settings.groundVerticeSeperation * 5);
         
         BoxGenerator boxGenerator = FindObjectOfType<BoxGenerator>();
 

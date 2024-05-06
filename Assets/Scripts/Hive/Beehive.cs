@@ -31,10 +31,15 @@ public class Beehive : MonoBehaviour
     {
         stateCheckTimer = stateCheckTime;
         health = healthMaximum;
+        
+    }
+
+    private void Start()
+    {
         ReleaseBee(3);
     }
-    
-    
+
+
     private void FixedUpdate()
     {
         if (stateCheckTimer <= 0)
@@ -72,17 +77,24 @@ public class Beehive : MonoBehaviour
 
     public void ReleaseBee(int number)
     {
-        for (int i = 0; i < number; i++)
-        {
-            beeCount++;
-            pollen -= BeePollenCost;
-            Instantiate
+        /*
+         *Instantiate
             (
                 beePrefab, 
                 beeSpawnLocation.transform.position + new Vector3(Random.Range( -0.5f, 0.5f), Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f)) * transform.localScale.x,
                 transform.rotation,
                 beeParent.transform
             );
+         *
+         * 
+         */
+        for (int i = 0; i < number; i++)
+        {
+            beeCount++;
+            pollen -= BeePollenCost;
+            GetComponent<HiveGeneticsManager>().Spawnpoint = beeSpawnLocation.transform.position;
+            print("Spawn Bee");
+            GetComponent<HiveGeneticsManager>().OnBeeLeaving(2);
         }
     }
 

@@ -11,11 +11,12 @@ public class HiveGeneticsManager : MonoBehaviour
     private int ParentB;
     private int Beemoved;
     [SerializeField] private GameObject Beefab;
-    [SerializeField] private Vector3 Spawnpoint;
-    private List<float[]> BA = new List<float[]>();
+    public Vector3 Spawnpoint;
+    public List<float[]> BA;
 
-    void Start()
+    void Awake()
     {
+        BA = new List<float[]>();
         for(int i = 0; i<3; i++)
         {
             float[] tempCopy = new float[5];

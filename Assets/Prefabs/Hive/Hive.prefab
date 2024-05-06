@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 2106237714160533117}
   - component: {fileID: 2106237714160533106}
   - component: {fileID: 2106237714160533107}
+  - component: {fileID: 6059309415390874928}
   m_Layer: 0
   m_Name: Hive
   m_TagString: Untagged
@@ -225,6 +226,20 @@ MonoBehaviour:
   healthMaximum: 3
   stateCheckTime: 5
   stateCheckTimer: 0
+--- !u!114 &6059309415390874928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106237714160533104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a72a4bc23498cea42be02211a18a230b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Beefab: {fileID: 5897078380245772637, guid: 8acc63823f65c41b8a41aeca5bd4b458, type: 3}
+  Spawnpoint: {x: 0, y: 0, z: 0}
 --- !u!1 &2393166558888404051
 GameObject:
   m_ObjectHideFlags: 0
