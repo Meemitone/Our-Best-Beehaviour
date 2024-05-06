@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5897078380245772639}
   - component: {fileID: 5897078380245772638}
   - component: {fileID: 5897078380245772626}
+  - component: {fileID: 7098842428331743594}
+  - component: {fileID: 3578143067614134492}
   - component: {fileID: 5897078380245772625}
   - component: {fileID: 6833739896176209784}
   m_Layer: 0
@@ -28,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5897078380245772637}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -53,8 +55,10 @@ MonoBehaviour:
   maxForce: 10
   gravity: 3
   behaviours:
-  - {fileID: 5897078380245772638}
+  - {fileID: 7098842428331743594}
   - {fileID: 5897078380245772626}
+  - {fileID: 5897078380245772638}
+  - {fileID: 3578143067614134492}
   currentBox: {fileID: 0}
   currentDirection: {x: 0, y: 0, z: 0}
   turnMax: 180
@@ -83,7 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   weight: 5
-  resetTimer: 2
+  resetTimer: 0.5
   wanderAmount: 1
   wanderY: 0.2
 --- !u!114 &5897078380245772626
@@ -105,6 +109,37 @@ MonoBehaviour:
   pushAway: 2
   numOfB: 3
   timeForCheck: 1
+--- !u!114 &7098842428331743594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897078380245772637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44898f97ecd3f4e03b9719db0489da6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  weight: 5
+  timeBetweenChecks: 1
+--- !u!114 &3578143067614134492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897078380245772637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854e4ef00eed4481094cb45e3bec06c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  weight: 3
+  stopRange: 3
+  waitTime: 2
 --- !u!65 &5897078380245772625
 BoxCollider:
   m_ObjectHideFlags: 0

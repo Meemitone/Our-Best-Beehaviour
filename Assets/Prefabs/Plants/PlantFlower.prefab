@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 8921671616362132408}
   m_Layer: 0
   m_Name: Seeds
-  m_TagString: Untagged
+  m_TagString: Flower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 198348184775812836}
   m_Layer: 0
   m_Name: PlantFlower
-  m_TagString: Untagged
+  m_TagString: Flower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   takenByBee: 0
   targetPoint: {fileID: 8921671616362132408}
+  nearestBox: {fileID: 0}
 --- !u!1 &3477093779665331070
 GameObject:
   m_ObjectHideFlags: 0

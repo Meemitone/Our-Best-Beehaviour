@@ -15,6 +15,8 @@ public class Arrive : Behaviour
 
     public float waitTime = 2f;
 
+    bool waitingToLeave = false;
+
     private void Start()
     {
         myBee = GetComponent<BeeBoid>();
@@ -25,7 +27,7 @@ public class Arrive : Behaviour
     {
         arriveTarget = arriveHere;
 
-        if (arriveHere.TryGetComponent<BeeInteraction>(out BeeInteraction interact))
+        if (arriveHere.parent.TryGetComponent<BeeInteraction>(out BeeInteraction interact))
             interact.takenByBee = true;
 
         active = true;
@@ -49,17 +51,21 @@ public class Arrive : Behaviour
 
         calForce *= dis;
 
-        if(dis < 0.1f && arriveTarget.tag == "Flower")
+        if(dis < 0.5f && arriveTarget.parent.tag == "Flower")
         {
             calForce = new();
             myBee.currentDirection = new();
+            transform.parent = arriveTarget;
 
-            arriveTarget.GetComponent<Flower>().TakePollen(myBee.maxPolenHold - myBee.polenHeld, ref myBee.flowData);
+            active = false;
+            arriveTarget.parent.GetComponent<Flower>().TakePollen(myBee.maxPolenHold - myBee.polenHeld, ref myBee.flowData);
 
+            print("Ready to leave");
+            waitingToLeave = true;
             StartCoroutine(PrepareLeave());
 
         }
-        else if(dis < 0.1f && arriveTarget.tag == "Hive")
+        else if(dis < 0.5f && arriveTarget.tag == "Hive")
         {
 
 
@@ -71,20 +77,31 @@ public class Arrive : Behaviour
     private IEnumerator PrepareLeave()
     {
 
+        print("Ready to leave");
+
         yield return new WaitForSeconds(waitTime);
 
-        if (arriveTarget.TryGetComponent<BeeInteraction>(out BeeInteraction interact))
-            interact.takenByBee = true;
+        print("Leaving now");
+
+        if (arriveTarget.parent.TryGetComponent<BeeInteraction>(out BeeInteraction interact))
+        {
+            interact.takenByBee = false;
+
+        }
 
         arriveTarget = null;
 
-        active = false;
+        transform.parent = null;
 
         foreach (Behaviour beeB in myBee.behaviours)
         {
             if (beeB != this)
                 beeB.active = true;
+
+            print(beeB.active);
         }
+
+        waitingToLeave = false;
 
     }
 

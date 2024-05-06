@@ -10,12 +10,14 @@ public class BeeInteraction : MonoBehaviour
 
     public Transform targetPoint;
 
+    [SerializeField] Box nearestBox;
+
     private void Start()
     {
 
         Box[] boxes = FindObjectsOfType<Box>();
 
-        Box nearestBox = null;
+        nearestBox = null;
         float boxDis = 0;
 
         foreach (Box box in boxes)
@@ -39,6 +41,14 @@ public class BeeInteraction : MonoBehaviour
             nearestBox.objectsInBox.Add(transform);
         }
 
+    }
+
+    private void OnDestroy()
+    {
+        if (nearestBox != null)
+        {
+            nearestBox.objectsInBox.Remove(transform);
+        }
     }
 
 }

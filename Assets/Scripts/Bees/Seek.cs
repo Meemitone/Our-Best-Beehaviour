@@ -13,6 +13,14 @@ public class Seek : Behaviour
     [SerializeField] float timeBetweenChecks = 1f;
 
     Vector3 calForce = new();
+
+    private Transform lastFlower;
+
+    private void Start()
+    {
+        lastFlower = transform;
+    }
+
     public override Vector3 CalculateForce()
     {
         if (checkFlower)
@@ -23,26 +31,9 @@ public class Seek : Behaviour
 
             if (tarFlower == null || tarFlower.GetComponent<BeeInteraction>().takenByBee)
             {
-                Transform tarFlower = null;
-                float flowDis = 0;
-                foreach (Transform flower in curBox.objectsInBox)
-                {
-                    if (flower.tag == "Flower")
-                    {
-                        if (tarFlower == null && !flower.GetComponent<BeeInteraction>().takenByBee)
-                        {
-                            tarFlower = flower;
-                            flowDis = Vector3.Distance(transform.position, flower.position);
-                        }
-                        else if (flowDis > Vector3.Distance(transform.position, flower.position) && !flower.GetComponent<BeeInteraction>().takenByBee)
-                        {
-                            tarFlower = flower;
-                            flowDis = Vector3.Distance(transform.position, flower.position);
-                        }
+                tarFlower = null;
 
-                    }
-                }
-                if (tarFlower == null)
+                float flowDis = 0;
                 {
                     foreach (Box box in curBox.neighbours)
                     {
@@ -50,12 +41,13 @@ public class Seek : Behaviour
                         {
                             if (flower.tag == "Flower")
                             {
-                                if (tarFlower == null && !flower.GetComponent<BeeInteraction>().takenByBee)
+                                if (tarFlower == null && !flower.GetComponent<BeeInteraction>().takenByBee && flower.GetComponent<Flower>().pollen >= 1 && flower != lastFlower)
                                 {
                                     tarFlower = flower;
                                     flowDis = Vector3.Distance(transform.position, flower.position);
                                 }
-                                else if (flowDis > Vector3.Distance(transform.position, flower.position) && !flower.GetComponent<BeeInteraction>().takenByBee)
+                                else if (flowDis > Vector3.Distance(transform.position, flower.position) && !flower.GetComponent<BeeInteraction>().takenByBee
+                                    && flower.GetComponent<Flower>().pollen >= 1 && flower != lastFlower)
                                 {
                                     tarFlower = flower;
                                     flowDis = Vector3.Distance(transform.position, flower.position);
@@ -63,8 +55,6 @@ public class Seek : Behaviour
 
                             }
                         }
-                        if (tarFlower != null)
-                            break;
                     }
                 }
             }
@@ -72,6 +62,7 @@ public class Seek : Behaviour
             {
                 GetComponent<Wander>().active = false;
                 calForce = (tarFlower.GetComponent<BeeInteraction>().targetPoint.position - transform.position) * weight;
+
 
             }
             else
@@ -85,9 +76,12 @@ public class Seek : Behaviour
         }
 
         if (tarFlower != null && !tarFlower.GetComponent<BeeInteraction>().takenByBee
-            && GetComponent<Arrive>().stopRange >= Vector3.Distance(tarFlower.position, transform.position))
-            GetComponent<Arrive>().BeginArrive(tarFlower);
-
+            && GetComponent<Arrive>().stopRange >= Vector3.Distance(tarFlower.GetComponent<BeeInteraction>().targetPoint.position, transform.position))
+        {
+            print("Arrived");
+            GetComponent<Arrive>().BeginArrive(tarFlower.GetComponent<BeeInteraction>().targetPoint);
+            lastFlower = tarFlower;
+        }
         return calForce;
     }
 
