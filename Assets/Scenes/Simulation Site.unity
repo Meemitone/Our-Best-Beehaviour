@@ -1687,6 +1687,9 @@ MonoBehaviour:
   - {fileID: 2421845518327732281, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7, type: 3}
   beeHivePrefab: {fileID: 2106237714160533104, guid: 5f05439efb05a89488bfe6041b3525e9,
     type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 503
 --- !u!1 &709712057
 GameObject:
   m_ObjectHideFlags: 0
