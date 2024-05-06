@@ -9,7 +9,6 @@ public class HiveGeneticsManager : MonoBehaviour
     private int Beenome;
     private int ParentA;
     private int ParentB;
-    private int BeeNumber;
     private float[] Baybee = new float[5];
     private int Beemoved;
     [SerializeField] private GameObject Beefab;
@@ -31,15 +30,13 @@ public class HiveGeneticsManager : MonoBehaviour
         }
     }
 
-    public void
-        OnBeeLeaving(
-            int Beeleavers) // call OnBeeLeaving(int) to spawn a bees in the hive equal to the chosen number or until hive is empty
+    public void OnBeeLeaving(int Beeleavers) // call OnBeeLeaving(int) to spawn a bees in the hive equal to the chosen number or until hive is empty
     {
         for (int i = 0; i < Beeleavers; i++)
         {
-            if (BeeNumber > 0)
+            if (BA.Count > 0)
             {
-                Beemoved = Random.Range(0, BeeNumber);
+                Beemoved = Random.Range(0, BA.Count);
                 Beefab.GetComponent<BeeneticAlgorithm>().Benes = BA[Beemoved];
                 Beefab.GetComponent<BeeneticAlgorithm>().NewBee = true;
                 Instantiate(Beefab, Spawnpoint, Quaternion.identity);
