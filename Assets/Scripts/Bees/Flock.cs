@@ -110,8 +110,10 @@ public class Flock : Behaviour
             foreach (BeeBoi beeBoi in myBois)
             {
                 if (beeBoi.beeBody == null)
+                {
                     continue;
-                calForce += beeBoi.beeBody.force;
+                    calForce += beeBoi.beeBody.force;
+                }
                 if (beeBoi.beeDis < minDistance)
                     calForce += beeBoi.beeDir * -pushAway;
             }

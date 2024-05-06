@@ -26,8 +26,7 @@ public class HiveGeneticsManager : MonoBehaviour
             BA.Add(tempCopy);
         }
     }
-    private void OnTriggerEnter(
-            Collider other) //will correct depending on how we decide to trigger a bee entering the hive. Adds a bees genes to the hive when they enter.
+    public void OnBeeReturn(GameObject other) //will correct depending on how we decide to trigger a bee entering the hive. Adds a bees genes to the hive when they enter.
     {
         
 

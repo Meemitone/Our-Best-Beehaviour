@@ -15,6 +15,8 @@ public class Arrive : Behaviour
 
     public float waitTime = 2f;
 
+    [SerializeField] float hiveRange = 1.0f;
+
     private void Start()
     {
         myBee = GetComponent<BeeBoid>();
@@ -64,10 +66,10 @@ public class Arrive : Behaviour
             StartCoroutine(PrepareLeave());
 
         }
-        else if(dis < 0.5f && arriveTarget.tag == "Hive")
+        else if(dis < hiveRange && arriveTarget.tag == "Hive")
         {
-
-
+            active = false;
+            arriveTarget.GetComponent<HiveGeneticsManager>().OnBeeReturn(gameObject);
         }
         return calForce;
 
