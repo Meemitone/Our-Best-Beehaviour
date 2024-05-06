@@ -81,6 +81,7 @@ public class Seek : Behaviour
             print("Arrived");
             GetComponent<Arrive>().BeginArrive(tarFlower.GetComponent<BeeInteraction>().targetPoint);
             lastFlower = tarFlower;
+            tarFlower = null;
         }
         return calForce;
     }

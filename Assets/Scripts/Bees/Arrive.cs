@@ -15,8 +15,6 @@ public class Arrive : Behaviour
 
     public float waitTime = 2f;
 
-    bool waitingToLeave = false;
-
     private void Start()
     {
         myBee = GetComponent<BeeBoid>();
@@ -51,6 +49,8 @@ public class Arrive : Behaviour
 
         calForce *= dis;
 
+        calForce = Vector3.ClampMagnitude(calForce, weight);
+
         if(dis < 0.5f && arriveTarget.parent.tag == "Flower")
         {
             calForce = new();
@@ -58,10 +58,9 @@ public class Arrive : Behaviour
             transform.parent = arriveTarget;
 
             active = false;
-            arriveTarget.parent.GetComponent<Flower>().TakePollen(myBee.maxPolenHold - myBee.polenHeld, ref myBee.flowData);
+            myBee.polenHeld = arriveTarget.parent.GetComponent<Flower>().TakePollen(myBee.maxPolenHold - myBee.polenHeld, ref myBee.flowData);
 
             print("Ready to leave");
-            waitingToLeave = true;
             StartCoroutine(PrepareLeave());
 
         }
@@ -81,28 +80,28 @@ public class Arrive : Behaviour
 
         yield return new WaitForSeconds(waitTime);
 
-        print("Leaving now");
 
         if (arriveTarget.parent.TryGetComponent<BeeInteraction>(out BeeInteraction interact))
         {
             interact.takenByBee = false;
-
         }
 
         arriveTarget = null;
 
         transform.parent = null;
-
-        foreach (Behaviour beeB in myBee.behaviours)
+        if(myBee.polenHeld >= myBee.maxPolenHold)
         {
-            if (beeB != this)
-                beeB.active = true;
 
-            print(beeB.active);
+            BeginArrive(myBee.homeHive);
+
         }
+        else
+            foreach (Behaviour beeB in myBee.behaviours)
+                if (beeB != this)
+                    beeB.active = true;
 
-        waitingToLeave = false;
 
+        print("Leaving now");
     }
 
 }
