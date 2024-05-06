@@ -84,9 +84,10 @@ public class HiveGeneticsManager : MonoBehaviour
                         Baybee[i] = 0f;
                     }
 
-                    if (i == 5)
+                    if (i == 4)
                     { 
                         BA.Add(Baybee); 
+                        print(BA.Count());
                     }
                 }
             }
