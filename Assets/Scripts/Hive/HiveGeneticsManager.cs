@@ -20,7 +20,7 @@ public class HiveGeneticsManager : MonoBehaviour
         OnTriggerEnter(
             Collider other) //will correct depending on how we decide to trigger a bee entering the hive. Adds a bees genes to the hive when they enter.
     {
-        print("yippie");
+        
 
         if (other.gameObject.CompareTag("Bee"))
         {
