@@ -7,13 +7,13 @@ public class BeeneticAlgorithm : MonoBehaviour
     public bool NewBee;
     
     void Start()
-    {
+    {/*
         LateStart();
     }
 
     public IEnumerator LateStart()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.01f);*/
         if (!NewBee)
         {
             for (int i = 0; i < Benes.Length; i++)

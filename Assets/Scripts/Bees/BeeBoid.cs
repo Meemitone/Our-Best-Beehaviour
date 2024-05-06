@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class BeeBoid : BoidBasic
 {
@@ -29,6 +30,7 @@ public class BeeBoid : BoidBasic
 
         Movement();
         Rotation();
+        TryToDie();
 
     }
 
@@ -84,7 +86,7 @@ public class BeeBoid : BoidBasic
 
     }
 
-    private void Awake()
+    private void Start()
     {
 
         BeeneticAlgorithm statGen = GetComponent<BeeneticAlgorithm>();
@@ -99,9 +101,20 @@ public class BeeBoid : BoidBasic
 
         maxPolenHold = beeStats[4].statBase;
 
+        selfDistruct = beeStats[5].statBase;
+
         Box[] boxes = FindObjectsOfType<Box>();
 
     }
+
+    private void TryToDie()
+    {
+        selfDistruct -= Time.deltaTime;
+
+        if (selfDistruct <= 0)
+            Destroy(gameObject);
+    }
+
 }
 
 [Serializable]

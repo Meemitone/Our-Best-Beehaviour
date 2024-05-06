@@ -17,9 +17,9 @@ public class HoldInArea : Behaviour
     private void Awake()
     {
         myBee = GetComponent<BeeBoid>();
-        maxRange *= myBee.beeStats[2].statBase;
 
         maxRange = FindObjectOfType<BoxGenerator>().scale;
+        maxRange *= myBee.beeStats[2].statBase;
 
     }
 
@@ -31,7 +31,7 @@ public class HoldInArea : Behaviour
         if (checkOutOfBounds && !returning && DistanceOut())
         {
 
-            myAim = myBee.currentBox.neighbours[0].transform.position;
+            myAim = myBee.currentBox.transform.parent.position;
             myAim.y = transform.position.y;
 
             returning = true;
@@ -41,10 +41,14 @@ public class HoldInArea : Behaviour
         if(returning)
         {
             float dis = Vector3.Distance(myAim, transform.position);
-            if (dis < 0.5f)
+
+            GetComponent<Flock>().active = false;
+
+            if (dis < 1f)
             {
                 myAim = new();
                 returning = false;
+                GetComponent<Flock>().active = true;
             }
             else
                 calForce = (myAim - transform.position) * weight;
@@ -65,6 +69,17 @@ public class HoldInArea : Behaviour
         bool check = Vector2.Distance(vec1, vec2) > maxRange;
 
         return check;
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if(returning && other.tag == "Box")
+        {
+            returning = false;
+            GetComponent<Flock>().active = true;
+        }
 
     }
 

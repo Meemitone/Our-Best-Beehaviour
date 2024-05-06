@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: 0, y: 0, z: 0}
-  maxForce: 10
+  maxForce: 6
   gravity: 3
   behaviours:
   - {fileID: 8820283460226604386}
@@ -223,7 +223,7 @@ MonoBehaviour:
     isInt: 0
   - name: Speed
     statBase: 0.75
-    maxShift: 0.5
+    maxShift: 0.75
     isInt: 0
   - name: Fear
     statBase: 1.25
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
-  weight: 5
+  weight: 10
   resetTimer: 0.5
   wanderAmount: 1
   wanderY: 0.2
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
-  weight: 1
+  weight: 5
 --- !u!65 &5897078380245772625
 BoxCollider:
   m_ObjectHideFlags: 0

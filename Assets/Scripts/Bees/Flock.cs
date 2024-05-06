@@ -51,7 +51,7 @@ public class Flock : Behaviour
                     BeeBoi curBee = new();
 
                     curBee.beeDis = Vector3.Distance(transform.position, bee.position);
-                    if (curBee.beeDis < maxDistance)
+                    if (curBee.beeDis < maxDistance && bee.GetComponent<Flock>().active)
                     {
 
                         curBee.beeDir = bee.position - transform.position;
