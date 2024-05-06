@@ -12,22 +12,19 @@ public class HiveGeneticsManager : MonoBehaviour
     private int BeeNumber;
     private int BeesToMake;
     public float[] Baybee = new float[5];
-    //[SerializeField] private List<BeeneticAlgorithm> BA = new List<BeeneticAlgorithm>();
     private int Beemoved;
     private GameObject Beefab;
     [SerializeField] private Vector3 Spawnpoint;
-    private List<float[]> BA = new List<float[]>();     //might need this to replace BA
+    private List<float[]> BA = new List<float[]>();
     
     private void OnTriggerEnter(Collider other) //will correct depending on how we decide to trigger a bee entering the hive. Adds a bees genes to the hive when they enter.
     {
         if (other.tag == "Bee")
         {
-
             BA[BeeNumber] = other.GetComponent<BeeneticAlgorithm>().Benes;
             BeeNumber++;
             Destroy(other.GameObject());
         }
-        
     }
     
     public void OnBeeLeaving(int Beeleavers) // call OnBeeLeaving(int) to spawn a bees in the hive equal to the chosen number or until hive is empty
@@ -53,18 +50,18 @@ public class HiveGeneticsManager : MonoBehaviour
 
     public void Beeproduction(int NewBees)
     {
-        BeesToMake = NewBees;
+        BeesToMake = NewBees;                  
         for (int x = 0; x < NewBees; x++)
         {
             ParentA = Random.Range(0, BeeNumber);
             ParentB = Random.Range(0, BeeNumber);
             if (ParentA == ParentB)
             {
-                Beeproduction(BeesToMake);
+                Beeproduction(BeesToMake);                   // in case this call uses the same bee on itself for reproduction, makes the call again with remaining number of desired bees.
             }
             else if( ParentA != ParentB)
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 5; i++)                  // picks genes at random from both parents and mutates them slightly;
                 {
                     Beenome = Random.Range(0, 2);
                     if (Beenome == 1)
@@ -75,7 +72,14 @@ public class HiveGeneticsManager : MonoBehaviour
                     {
                         Baybee[i] = BA[ParentB][i] + Random.Range(-0.01f, 0.01f);
                     }
-
+                    if (Baybee[i] > 1f)
+                    {
+                        Baybee[i] = 1f;
+                    }
+                    if (Baybee[i] < 0f)
+                    {
+                        Baybee[i] = 0f;
+                    }
                     if (i == 5)
                     {
                         BA[BeeNumber] = Baybee;
