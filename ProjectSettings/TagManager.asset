@@ -8,6 +8,7 @@ TagManager:
   - Box
   - Bee
   - Flower
+  - Hive
   layers:
   - Default
   - TransparentFX
