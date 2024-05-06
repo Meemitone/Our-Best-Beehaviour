@@ -58,7 +58,7 @@ public class Arrive : Behaviour
             transform.parent = arriveTarget;
 
             active = false;
-            myBee.polenHeld = arriveTarget.parent.GetComponent<Flower>().TakePollen(myBee.maxPolenHold - myBee.polenHeld, ref myBee.flowData);
+            myBee.polenHeld += arriveTarget.parent.GetComponent<Flower>().TakePollen(myBee.maxPolenHold - myBee.polenHeld, ref myBee.flowData);
 
             print("Ready to leave");
             StartCoroutine(PrepareLeave());
@@ -93,7 +93,7 @@ public class Arrive : Behaviour
         {
 
             BeginArrive(myBee.homeHive);
-
+            GetComponent<Flock>().active = true;
         }
         else
             foreach (Behaviour beeB in myBee.behaviours)

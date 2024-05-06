@@ -14,8 +14,10 @@ GameObject:
   - component: {fileID: 5897078380245772626}
   - component: {fileID: 7098842428331743594}
   - component: {fileID: 3578143067614134492}
+  - component: {fileID: 8820283460226604386}
   - component: {fileID: 5897078380245772625}
   - component: {fileID: 6833739896176209784}
+  - component: {fileID: 387266892311927337}
   m_Layer: 0
   m_Name: BeeBoid
   m_TagString: Bee
@@ -73,6 +75,27 @@ MonoBehaviour:
     seedCount: 3
     energy: 100
   homeHive: {fileID: 0}
+  beeStats:
+  - name: Weight(Accelleration)
+    statBase: 1.5
+    maxShift: -1
+    isInt: 0
+  - name: Speed
+    statBase: 0.75
+    maxShift: 0.5
+    isInt: 0
+  - name: Fear
+    statBase: 1.25
+    maxShift: -0.5
+    isInt: 0
+  - name: Solitarity
+    statBase: 5
+    maxShift: -4
+    isInt: 0
+  - name: Strength
+    statBase: 2
+    maxShift: 2
+    isInt: 1
 --- !u!114 &5897078380245772638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +163,20 @@ MonoBehaviour:
   weight: 3
   stopRange: 3
   waitTime: 2
+--- !u!114 &8820283460226604386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897078380245772637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c5704cd0531e47719fd97163562d453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  weight: 1
 --- !u!65 &5897078380245772625
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -261,6 +298,24 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &387266892311927337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897078380245772637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc8c06fc6bf2f64a9fdbb2bb706f2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Benes:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!1001 &5897078378469428464
 PrefabInstance:
   m_ObjectHideFlags: 0

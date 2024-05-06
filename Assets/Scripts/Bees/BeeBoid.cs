@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class BeeBoid : BoidBasic
 {
@@ -20,6 +21,8 @@ public class BeeBoid : BoidBasic
 
     public Transform homeHive;
 
+    public List<BeeStat> beeStats = new List<BeeStat>();
+
     private void FixedUpdate()
     {
 
@@ -31,11 +34,11 @@ public class BeeBoid : BoidBasic
     public void Movement()
     {
 
-        currentDirection += force * Time.deltaTime * acceleration;
+        currentDirection += force * Time.deltaTime * acceleration * beeStats[0].statBase;
 
         float curClamp = Vector3.Magnitude(force);
 
-        currentDirection = Vector3.ClampMagnitude(currentDirection, curClamp);
+        currentDirection = Vector3.ClampMagnitude(currentDirection, curClamp) * beeStats[1].statBase;
 
         transform.position += currentDirection * Time.deltaTime;
 
@@ -79,5 +82,31 @@ public class BeeBoid : BoidBasic
         return forward;
 
     }
+
+    private void Awake()
+    {
+
+        BeeneticAlgorithm statGen = GetComponent<BeeneticAlgorithm>();
+
+        for (int i = 0; i < beeStats.Count; i++)
+        {
+            beeStats[i].statBase += beeStats[i].maxShift * statGen.Benes[i];
+
+            if (beeStats[i].isInt)
+                beeStats[i].statBase = Mathf.RoundToInt(beeStats[i].statBase);
+        }
+
+        maxPolenHold = beeStats[4].statBase;
+     }
+}
+
+[Serializable]
+public class BeeStat
+{
+
+    public string name;
+    public float statBase;
+    public float maxShift;
+    public bool isInt;
 
 }

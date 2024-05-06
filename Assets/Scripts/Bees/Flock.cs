@@ -33,6 +33,8 @@ public class Flock : Behaviour
     private void Start()
     {
         beeBody = GetComponent<BeeBoid>();
+
+        weight = beeBody.beeStats[3].statBase;
     }
 
     public override Vector3 CalculateForce()

@@ -9,20 +9,15 @@ public class HiveGeneticsManager : MonoBehaviour
  //extra stats cause i cant think :(
     private int BeeNumber;
     private BeeneticAlgorithm BA;
-    public int[,] Benetics = new int[10,5];
-    private int MaxBees;
+    public float[,] Benetics = new float[10,5];
+    public int MaxBees = 10;
     public GameObject[] Bees;
 
-    private void Awake()
-    {
-        MaxBees = 10;
-        BeeNumber = 0;
-    }
 
     void Start()
     {
         
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < MaxBees; i++)
         {
             BeeNumber = i;
             for (int j = 0; j < 5; j++)

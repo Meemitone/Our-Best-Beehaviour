@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BeeneticAlgorithm : MonoBehaviour
 {
-    public int[] Benes = new int[5];
+    public float[] Benes = new float[5];
     
     
     // Start is called before the first frame update
@@ -12,7 +12,7 @@ public class BeeneticAlgorithm : MonoBehaviour
     {
         for (int i = 0; i < Benes.Length; i++)
         {
-            Benes[i] = Random.Range(1, 10);
+            Benes[i] = Random.Range(0.0f, 1.0f);
         }
     }
 

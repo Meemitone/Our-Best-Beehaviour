@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -412,7 +412,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -560,7 +560,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -634,7 +634,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -782,7 +782,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -856,7 +856,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -930,7 +930,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -1004,7 +1004,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -1078,7 +1078,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -1152,7 +1152,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -1226,7 +1226,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -1300,7 +1300,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -1492,7 +1492,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
@@ -1566,7 +1566,7 @@ PrefabInstance:
     - target: {fileID: 2421845518327732286, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
       propertyPath: genetics.energy
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2421845518327732287, guid: f75e9c21ace6e2b48b0ec1ecbb6cc7d7,
         type: 3}
