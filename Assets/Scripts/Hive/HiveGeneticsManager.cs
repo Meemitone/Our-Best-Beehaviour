@@ -10,7 +10,6 @@ public class HiveGeneticsManager : MonoBehaviour
     private int ParentA;
     private int ParentB;
     private int BeeNumber;
-    private int BeesToMake;
     private float[] Baybee = new float[5];
     private int Beemoved;
     [SerializeField] private GameObject Beefab;
@@ -58,15 +57,13 @@ public class HiveGeneticsManager : MonoBehaviour
     {
         if (BA.Count > 1)
         {
-            BeesToMake = NewBees;
             for (int x = 0; x < NewBees; x++)
             {
                 ParentA = Random.Range(0, BA.Count);
                 ParentB = Random.Range(0, BA.Count);
                 while (ParentA == ParentB && BA.Count > 1)
                 {
-                    ParentB = Random.Range(0,
-                        BA.Count); // in case this call uses the same bee on itself for reproduction, makes the call again with remaining number of desired bees.
+                    ParentB = Random.Range(0,BA.Count); // in case this call uses the same bee on itself for reproduction, makes the call again with remaining number of desired bees.
                 }
                 for (int i = 0; i < 5; i++) // picks genes at random from both parents and mutates them slightly;
                 {
@@ -93,7 +90,6 @@ public class HiveGeneticsManager : MonoBehaviour
                     if (i == 5)
                     { 
                         BA.Add(Baybee); 
-                        BeesToMake--;
                     }
                 }
             }
