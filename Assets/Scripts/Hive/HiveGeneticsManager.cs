@@ -47,9 +47,9 @@ public class HiveGeneticsManager : MonoBehaviour
             if (BA.Count > 0)
             {
                 Beemoved = Random.Range(0, BA.Count);
-                Beefab.GetComponent<BeeneticAlgorithm>().Benes = BA[Beemoved];
-                Beefab.GetComponent<BeeneticAlgorithm>().NewBee = true;
-                Instantiate(Beefab, Spawnpoint, Quaternion.identity);
+                GameObject Baybee = Instantiate(Beefab, Spawnpoint, Quaternion.identity);
+                Baybee.GetComponent<BeeneticAlgorithm>().Benes = BA[Beemoved];
+                Baybee.GetComponent<BeeneticAlgorithm>().NewBee = true;
                 BA.RemoveAt(Beemoved);
             }
             else
