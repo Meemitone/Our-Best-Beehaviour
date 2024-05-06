@@ -8,12 +8,12 @@ public class BeeneticAlgorithm : MonoBehaviour
     
     void Start()
     {
-        StartCoroutine(LateStart());
+        LateStart();
     }
 
     public IEnumerator LateStart()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.01f);
         if (!NewBee)
         {
             for (int i = 0; i < Benes.Length; i++)
@@ -21,5 +21,7 @@ public class BeeneticAlgorithm : MonoBehaviour
                 Benes[i] = Random.Range(0.0f, 1.0f);
             }
         }
+            
     }
+
 }

@@ -27,10 +27,7 @@ public class Seek : Behaviour
         {
             calForce = new();
             Box curBox = GetComponent<BeeBoid>().currentBox;
-            if(curBox == null)
-            {
-                return Vector3.zero;
-            }
+
 
             if (tarFlower == null || tarFlower.GetComponent<BeeInteraction>().takenByBee)
             {
@@ -42,7 +39,7 @@ public class Seek : Behaviour
                     {
                         foreach (Transform flower in box.objectsInBox)
                         {
-                            if (flower!=null && flower.tag == "Flower")
+                            if (flower.tag == "Flower")
                             {
                                 if (tarFlower == null && !flower.GetComponent<BeeInteraction>().takenByBee && flower.GetComponent<Flower>().pollen >= 1 && flower != lastFlower)
                                 {

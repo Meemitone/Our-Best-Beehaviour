@@ -13,7 +13,7 @@ public class HoldInArea : Behaviour
 
     bool returning = false;
 
-    [SerializeField]private BeeBoid myBee;
+    private BeeBoid myBee;
     private void Start()
     {
 
@@ -58,8 +58,7 @@ public class HoldInArea : Behaviour
 
     private bool DistanceOut()
     {
-        if (myBee == null || myBee.currentBox == null)
-            return false;
+
         Vector3 otherLoc = myBee.currentBox.transform.position;
 
         Vector2 vec1 = new Vector2(transform.position.x, transform.position.z);

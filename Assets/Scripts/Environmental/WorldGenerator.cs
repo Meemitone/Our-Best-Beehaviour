@@ -43,6 +43,7 @@ public class WorldGenerator : MonoBehaviour
         PlacePlants();
         PlaceDecor();
         PlaceHives();
+        SetUpBoxes();
     }
 
     private void GenerateGround()
@@ -160,6 +161,21 @@ public class WorldGenerator : MonoBehaviour
                 Instantiate(beeHivePrefab, hit.point, quaternion.identity, newParent.transform);
             }
         }
+    }
+
+    private void SetUpBoxes()
+    {
+        int scale = Mathf.RoundToInt(settings.groundVerticeSeperation);
+        
+        BoxGenerator boxGenerator = FindObjectOfType<BoxGenerator>();
+
+        boxGenerator.numberOnAxis = new Vector2(settings.groundSize / (scale/2), settings.groundSize / (scale/2));
+        
+        boxGenerator.transform.position += Vector3.up *settings.groundSize / 2;
+
+        boxGenerator.scale = scale;
+        
+        boxGenerator.GenerateBoxes();
     }
 
     private Vector3 randomPos()
