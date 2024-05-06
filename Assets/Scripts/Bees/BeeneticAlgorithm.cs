@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BeeneticAlgorithm : MonoBehaviour
@@ -7,8 +6,6 @@ public class BeeneticAlgorithm : MonoBehaviour
     public float[] Benes = new float[5];
     public bool NewBee;
     
-    
-    // Start is called before the first frame update
     void Start()
     {
         LateStart();
