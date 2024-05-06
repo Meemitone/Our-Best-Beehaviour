@@ -21,9 +21,11 @@ public class HiveGeneticsManager : MonoBehaviour
     {
         print("yippie");
         
-        if (other.gameObject.tag == "Bee")
+        if (other.gameObject.CompareTag("Bee"))
         {
-            BA[BeeNumber] = other.GetComponent<BeeneticAlgorithm>().Benes;
+            float[] tempCopy = new float[5];
+            other.GetComponent<BeeneticAlgorithm>().Benes.CopyTo(tempCopy, 0);
+            BA.Add(tempCopy);
             BeeNumber++;
             Destroy(other.GameObject());
         }

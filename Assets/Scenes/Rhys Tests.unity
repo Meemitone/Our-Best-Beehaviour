@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -185,10 +185,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5897078380245772626, guid: 8acc63823f65c41b8a41aeca5bd4b458,
+        type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897078380245772626, guid: 8acc63823f65c41b8a41aeca5bd4b458,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5897078380245772637, guid: 8acc63823f65c41b8a41aeca5bd4b458,
         type: 3}
       propertyPath: m_Name
       value: BeeBoid
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098842428331743594, guid: 8acc63823f65c41b8a41aeca5bd4b458,
+        type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820283460226604386, guid: 8acc63823f65c41b8a41aeca5bd4b458,
+        type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820283460226604386, guid: 8acc63823f65c41b8a41aeca5bd4b458,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8acc63823f65c41b8a41aeca5bd4b458, type: 3}
