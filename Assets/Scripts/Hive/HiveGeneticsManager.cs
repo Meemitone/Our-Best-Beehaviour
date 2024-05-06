@@ -9,14 +9,11 @@ public class HiveGeneticsManager : MonoBehaviour
     private int Beenome;
     private int ParentA;
     private int ParentB;
-    private int BeeNumber;
-    private float[] Baybee = new float[5];
     private int Beemoved;
     [SerializeField] private GameObject Beefab;
     [SerializeField] private Vector3 Spawnpoint;
     private List<float[]> BA = new List<float[]>();
 
-<<<<<<< HEAD
     void Start()
     {
         for(int i = 0; i<3; i++)
@@ -30,13 +27,8 @@ public class HiveGeneticsManager : MonoBehaviour
         }
     }
     public void OnBeeReturn(GameObject other) //will correct depending on how we decide to trigger a bee entering the hive. Adds a bees genes to the hive when they enter.
-=======
-    private void
-        OnTriggerEnter(
-            Collider other) //will correct depending on how we decide to trigger a bee entering the hive. Adds a bees genes to the hive when they enter.
->>>>>>> b0580bc38ab770d0dbdd76f3ac18204579b2039b
     {
-        print("yippie");
+        
 
         if (other.gameObject.CompareTag("Bee"))
         {
@@ -47,18 +39,16 @@ public class HiveGeneticsManager : MonoBehaviour
         }
     }
 
-    public void
-        OnBeeLeaving(
-            int Beeleavers) // call OnBeeLeaving(int) to spawn a bees in the hive equal to the chosen number or until hive is empty
+    public void OnBeeLeaving(int Beeleavers) // call OnBeeLeaving(int) to spawn a bees in the hive equal to the chosen number or until hive is empty
     {
         for (int i = 0; i < Beeleavers; i++)
         {
-            if (BeeNumber > 0)
+            if (BA.Count > 0)
             {
-                Beemoved = Random.Range(0, BeeNumber);
-                Beefab.GetComponent<BeeneticAlgorithm>().Benes = BA[Beemoved];
-                Beefab.GetComponent<BeeneticAlgorithm>().NewBee = true;
-                Instantiate(Beefab, Spawnpoint, Quaternion.identity);
+                Beemoved = Random.Range(0, BA.Count);
+                GameObject Baybee = Instantiate(Beefab, Spawnpoint, Quaternion.identity);
+                Baybee.GetComponent<BeeneticAlgorithm>().Benes = BA[Beemoved];
+                Baybee.GetComponent<BeeneticAlgorithm>().NewBee = true;
                 BA.RemoveAt(Beemoved);
             }
             else
@@ -71,6 +61,7 @@ public class HiveGeneticsManager : MonoBehaviour
 
     public void Beeproduction(int NewBees)
     {
+        float[] Baybee = new float[5];
         if (BA.Count > 1)
         {
             for (int x = 0; x < NewBees; x++)
@@ -103,7 +94,7 @@ public class HiveGeneticsManager : MonoBehaviour
                         Baybee[i] = 0f;
                     }
 
-                    if (i == 5)
+                    if (i == 4)
                     { 
                         BA.Add(Baybee); 
                     }

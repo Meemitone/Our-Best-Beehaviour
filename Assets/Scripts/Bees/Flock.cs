@@ -40,13 +40,13 @@ public class Flock : Behaviour
     public override Vector3 CalculateForce()
     {
 
-        if (beecheck)
+        if (beecheck && beeBody.currentBox != null)
         {
 
             foreach (Transform bee in beeBody.currentBox.objectsInBox)
             {
 
-                if (bee.tag == "Bee")
+                if (bee != null && bee.tag == "Bee")
                 {
                     BeeBoi curBee = new();
 
@@ -70,7 +70,7 @@ public class Flock : Behaviour
                     foreach (Transform bee in box.objectsInBox)
                     {
 
-                        if (bee.tag == "Bee")
+                        if (bee != null && bee.tag == "Bee")
                         {
                             BeeBoi curBee = new();
 
@@ -92,7 +92,7 @@ public class Flock : Behaviour
 
             int length = myBois.Count;
 
-            for(int i = 0; i < numOfB; i++)
+            for (int i = 0; i < numOfB; i++)
             {
                 BeeBoi cur = new();
                 foreach (BeeBoi boi in myBois)
@@ -107,17 +107,11 @@ public class Flock : Behaviour
 
             myBois = newBois;
 
-            foreach(BeeBoi beeBoi in myBois)
+            foreach (BeeBoi beeBoi in myBois)
             {
-<<<<<<< HEAD
                 if (beeBoi.beeBody == null)
-                {
                     continue;
-                    calForce += beeBoi.beeBody.force;
-                }
-=======
                 calForce += beeBoi.beeBody.force;
->>>>>>> b0580bc38ab770d0dbdd76f3ac18204579b2039b
                 if (beeBoi.beeDis < minDistance)
                     calForce += beeBoi.beeDir * -pushAway;
             }
