@@ -9,14 +9,24 @@ public class HiveGeneticsManager : MonoBehaviour
     private int Beenome;
     private int ParentA;
     private int ParentB;
-    private float[] Baybee = new float[5];
     private int Beemoved;
     [SerializeField] private GameObject Beefab;
     [SerializeField] private Vector3 Spawnpoint;
     private List<float[]> BA = new List<float[]>();
 
-    private void
-        OnTriggerEnter(
+    void Start()
+    {
+        for(int i = 0; i<3; i++)
+        {
+            float[] tempCopy = new float[5];
+            for (int j = 0; j < 5; j++)
+            {
+                tempCopy[j] = Random.Range(0f, 1f);
+            }
+            BA.Add(tempCopy);
+        }
+    }
+    private void OnTriggerEnter(
             Collider other) //will correct depending on how we decide to trigger a bee entering the hive. Adds a bees genes to the hive when they enter.
     {
         
@@ -52,6 +62,7 @@ public class HiveGeneticsManager : MonoBehaviour
 
     public void Beeproduction(int NewBees)
     {
+        float[] Baybee = new float[5];
         if (BA.Count > 1)
         {
             for (int x = 0; x < NewBees; x++)
@@ -87,7 +98,6 @@ public class HiveGeneticsManager : MonoBehaviour
                     if (i == 4)
                     { 
                         BA.Add(Baybee); 
-                        print(BA.Count());
                     }
                 }
             }
