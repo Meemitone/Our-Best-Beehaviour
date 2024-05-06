@@ -217,7 +217,7 @@ MonoBehaviour:
   pollenDecayPerSecond: 0.1
   beeCount: 0
   BeePollenCost: 10
-  beePrefab: {fileID: 1567732791993384445, guid: 6b9873259179b5d4a9a8b42821727c9c,
+  beePrefab: {fileID: 5897078380245772637, guid: 8acc63823f65c41b8a41aeca5bd4b458,
     type: 3}
   beeSpawnLocation: {fileID: 6799046662467186974}
   beeParent: {fileID: 3933542517103937096}
