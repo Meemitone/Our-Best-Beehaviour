@@ -11,7 +11,7 @@ public class HiveGeneticsManager : MonoBehaviour
     private int ParentB;
     private int BeeNumber;
     private int BeesToMake;
-    public float[] Baybee = new float[5];
+    private float[] Baybee = new float[5];
     private int Beemoved;
     [SerializeField] private GameObject Beefab;
     [SerializeField] private Vector3 Spawnpoint;
@@ -19,7 +19,9 @@ public class HiveGeneticsManager : MonoBehaviour
     
     private void OnTriggerEnter(Collider other) //will correct depending on how we decide to trigger a bee entering the hive. Adds a bees genes to the hive when they enter.
     {
-        if (other.tag == "Bee")
+        print("yippie");
+        
+        if (other.gameObject.tag == "Bee")
         {
             BA[BeeNumber] = other.GetComponent<BeeneticAlgorithm>().Benes;
             BeeNumber++;
