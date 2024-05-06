@@ -1,64 +1,63 @@
-using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class HiveGeneticsManager : MonoBehaviour
 {
  //extra stats cause i cant think :(
     private int BeeNumber;
-    private BeeneticAlgorithm BA;
-    public float[,] Benetics = new float[10,5];
-    public int MaxBees = 10;
+    public float[] Benetics = new float[5];
     public GameObject[] Bees;
-
-
-    void Start()
+    [SerializeField] private List<BeeneticAlgorithm> BA = new List<BeeneticAlgorithm>();
+    private int Beemoved;
+    private GameObject Beefab;
+    private void Awake()
+    {
+        BeeNumber = 0;
+    }
+    
+    /*void Start()
     {
         
-        for (int i = 0; i < MaxBees; i++)
+        for (int i = 0; i < 10; i++)
         {
             BeeNumber = i;
-            for (int j = 0; j < 5; j++)
-            {
-                BA = Bees[j].GetComponent<BeeneticAlgorithm>();
+
+@@ -31,39 +31,26 @@ public class HiveGeneticsManager : MonoBehaviour
                 Benetics[BeeNumber, j] = BA.Benes[j];
                 //Debug.Log(Benetics[BeeNumber, i]);
             }
             
         }
 
-        for(int i = 0; i < 10; i++)
-        {
-            Debug.Log("This bees Weight is " + Benetics[i,0]);
-            Debug.Log("This bees Speed is " + Benetics[i,1]);
-            Debug.Log("This bees Fear is " + Benetics[i,2]);
-            Debug.Log("This bees Solidarity is " + Benetics[i,3]);
-            Debug.Log("This bees Strength is " + Benetics[i,4]);
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
 
-    private void OnTriggerEnter(Collider other) //will correct depending on how we decide to trigger a bee entering the hive
+    
+    
+    
+    }*/
+
+    private void OnTriggerEnter(Collider other) //will correct depending on how we decide to trigger a bee entering the hive. Adds a bees genes to the hive.
     {
         if (other.tag == "Bee")
         {
-            BA = other.GetComponent<BeeneticAlgorithm>();
-            for (int i = 0; i > MaxBees; i++)
-            {
-                Benetics[BeeNumber,i] = BA.Benes[i];
-                print(Benetics[BeeNumber,i]);
-            }
+ 
+            BA.Add(other.GetComponent<BeeneticAlgorithm>());
+            Benetics = other.GetComponent<BeeneticAlgorithm>().Benes;
             BeeNumber++;
+            Destroy(other.GameObject());
         }
         
     }
     
+
+
+    public void OnBeeLeaving()
+    {
+       Beemoved  = Random.Range(0,BeeNumber);
+       Beefab.GetComponent<BeeneticAlgorithm>().Benes = BA.ElementAt(Beemoved).Benes;
+       BA.RemoveAt(Beemoved);
+       BeeNumber--;
+    }
 }
