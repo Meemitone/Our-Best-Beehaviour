@@ -240,6 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Beefab: {fileID: 5897078380245772637, guid: 8acc63823f65c41b8a41aeca5bd4b458, type: 3}
   Spawnpoint: {x: 0, y: 0, z: 0}
+  respawnTime: 60
+  spawnCount: 15
 --- !u!1 &2393166558888404051
 GameObject:
   m_ObjectHideFlags: 0

@@ -307,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   weight: 3
-  stopRange: 3
+  stopRange: 5
   waitTime: 2
   hiveRange: 1
 --- !u!114 &8820283460226604386

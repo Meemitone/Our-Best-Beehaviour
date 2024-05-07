@@ -1780,6 +1780,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a76a4fff94e74e40b748f1d5b21851a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings:
+    groundSize: 0
+    groundVerticeSeperation: 0
+    groundWaveHeightScale: 0
+    hiveCount: 0
+    plantCount: 50
+    smallDecor: 0
+    largeDecor: 0
   ground: {fileID: 70407069}
   smallDecorationPrefabs:
   - {fileID: 5167101655237728851, guid: de4a966594d59554a8a4461f59196d80, type: 3}
@@ -2017,6 +2025,14 @@ MonoBehaviour:
   largeDecor: {fileID: 2065420992}
   hiveCount: {fileID: 1352166445}
   WorldGenerator: {fileID: 0}
+  Settings:
+    groundSize: 0
+    groundVerticeSeperation: 0
+    groundWaveHeightScale: 0
+    hiveCount: 0
+    plantCount: 50
+    smallDecor: 0
+    largeDecor: 0
 --- !u!4 &723290545
 Transform:
   m_ObjectHideFlags: 0

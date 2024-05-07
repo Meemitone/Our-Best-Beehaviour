@@ -26,7 +26,7 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] private Slider hiveCount;
     
     public WorldGenerator WorldGenerator;
-    private worldGenSettings Settings = new worldGenSettings();
+    [SerializeField] private worldGenSettings Settings = new worldGenSettings();
 
     public static ControlPanel instance;
 

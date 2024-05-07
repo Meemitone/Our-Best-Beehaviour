@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[Serializable]
 public struct worldGenSettings
 {
     [Header("Setup")]
@@ -12,7 +13,8 @@ public struct worldGenSettings
     public float groundVerticeSeperation; // = 2f;
     public float groundWaveHeightScale; // = 0.9f;
     public int hiveCount; // = 3;
-    
+    public int plantCount;
+
     [Header("Decoration Setup")] 
     public int smallDecor; // = 30;
     public int largeDecor; // = 15;
@@ -117,7 +119,7 @@ public class WorldGenerator : MonoBehaviour
         GameObject newParent = new GameObject();
         newParent.name = "Plants";
         
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < settings.plantCount; i++)
         {
             if (Physics.Raycast(randomPos(), Vector3.down, out RaycastHit hit, groundLayer))
             {

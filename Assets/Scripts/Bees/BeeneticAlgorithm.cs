@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BeeneticAlgorithm : MonoBehaviour
 {
-    public float[] Benes = new float[5];
+    public float[] Benes = new float[6];
     public bool NewBee;
     
     void Start()
