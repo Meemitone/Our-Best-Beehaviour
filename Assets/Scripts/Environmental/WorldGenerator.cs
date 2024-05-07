@@ -69,7 +69,7 @@ public class WorldGenerator : MonoBehaviour
                 vertices[index] = new Vector3
                 (
                     settings.groundVerticeSeperation * i - settings.groundVerticeSeperation * settings.groundSize / 2,
-                    (Mathf.PerlinNoise((float)x*0.04f, (float)y*0.04f) * settings.groundWaveHeightScale) - settings.groundWaveHeightScale / 2,
+                    (Mathf.PerlinNoise((float)x*0.04f, (float)y*0.04f) * settings.groundWaveHeightScale * 2) - settings.groundWaveHeightScale / 2,
                     settings.groundVerticeSeperation * j - settings.groundVerticeSeperation * settings.groundSize/2
                 );
                 
