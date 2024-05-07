@@ -1,13 +1,12 @@
 
-# Project Title
+# Our Best Beehaviour
+## Group Members
+Thomas "Tom" Grumley - C21410212
+Kate Johnston - C21762619
+Rhys Mac Gregor-Mason - C21314853
+Donnacha Lohan Davy - D22125453
 
-Name:
-
-Student Number: 
-
-Class Group:
-
-Include all team members names and student numbers if a team project
+Class Group:TU-984/3 (Game Design Year 3 for the whole group)
 
 # Description
 
@@ -22,6 +21,30 @@ Include all team members names and student numbers if a team project
 # How it works
 
 # List of classes/assets
+## Tom (Level Generation and Modelling)
+
+## Kate (Flowers)
+| Class/asset | Source | Purpose |
+|-----------|-----------|-----------|
+| PlantPart.cs | Self written | Base Class for plant bits |
+| PlantSeed.cs | Self written | Main controller for plants |
+| FlowerData.cs | Self written | Class to hold plant genetic info |
+| Leaf.cs | Self written | Plant Leaf inherits PlantPart |
+| FollowSun.cs | Self written | Boid Behaviour to seek the sun (Environmental Data) |
+| Flower.cs | Self written | Flower Head, makes pollen for bees, spawns seeds |
+| WindMotion.cs | Self written | Behaviour that makes a xz force for wind |
+| EnvironmentalData.cs | Self written | Holder for sun and wind info |
+| Stalk.cs | Self written |  |
+| MutateGlobal.cs | Self written |
+| WindDisplay.cs | Self written |
+| D20.asset | Self written |
+| HexTorus.asset | Self written |
+| Unit_Hexagonal_Prism.asset | Self written |
+| Kate's Default Material.mat | Self written |
+
+## Rhys(Bee Genetics)
+
+## Donnacha (Bees)
 
 | Class/asset | Source |
 |-----------|-----------|
