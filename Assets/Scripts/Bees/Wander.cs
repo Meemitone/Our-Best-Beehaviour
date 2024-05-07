@@ -26,6 +26,13 @@ public class Wander : Behaviour
 
     }
 
+    private void Start()
+    {
+
+        weight -= GetComponent<BeeBoid>().beeStats[3].statBase;
+
+    }
+
     public override Vector3 CalculateForce()
     {
         if (resetWander)
