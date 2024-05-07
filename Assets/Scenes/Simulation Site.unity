@@ -1639,7 +1639,7 @@ GameObject:
   - component: {fileID: 574241775}
   - component: {fileID: 574241773}
   m_Layer: 0
-  m_Name: Main Camera (1)
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2118,9 +2118,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 430169127}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 5
+  m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 5
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2651,9 +2651,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1486366298}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 50
+  m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 30
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2877,9 +2877,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 333177415}
   m_Direction: 0
   m_MinValue: 25
-  m_MaxValue: 250
+  m_MaxValue: 256
   m_WholeNumbers: 1
-  m_Value: 100
+  m_Value: 256
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3841,7 +3841,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1307991720
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4308,9 +4308,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1664599718}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 5
+  m_MaxValue: 30
   m_WholeNumbers: 1
-  m_Value: 3
+  m_Value: 30
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5429,7 +5429,7 @@ RectTransform:
   m_GameObject: {fileID: 1684051868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3299294, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 954113465}
@@ -5442,7 +5442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: 150}
+  m_AnchoredPosition: {x: -132, y: 150}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1697169166
@@ -5915,9 +5915,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 782713716}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 50
+  m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 15
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -29,8 +29,13 @@ public class OrbitalPlayer : MonoBehaviour
         else
         {
             index++;
+            if (index > boids.Length)
+            {
+                index = 0;
+            }
         }
-
+        
+        if(boids[index] != null)
         target = boids[index].gameObject;
     }
 
@@ -58,6 +63,21 @@ public class OrbitalPlayer : MonoBehaviour
             {
                 transform.position = target.transform.position;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SwitchBee(true);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SwitchBee(false);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Deactivate();
         }
 
 

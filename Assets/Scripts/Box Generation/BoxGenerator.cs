@@ -24,7 +24,7 @@ public class BoxGenerator : MonoBehaviour
                 positionMath.z += scale;
                 GameObject newBox = GameObject.Instantiate(boxPrefab, positionMath, transform.rotation, transform);
 
-                newBox.transform.localScale = new Vector3(scale, 100, scale);
+                newBox.transform.localScale = new Vector3(scale, transform.position.y * 2, scale);
 
                 newBox.name = "Cube(" + x + ", " + z + ")";
                 Box curBox = newBox.GetComponent<Box>();
