@@ -27,19 +27,29 @@ public class PlantSeed : MonoBehaviour
         LeafPivots = new List<int>();
         for (int j = 0; j < 6; j++)
             LeafPivots.Add(j);
-        StartCoroutine(Energy());
+        StartCoroutine(Falling());
+    }
+
+    IEnumerator Falling()
+    {
+        yield return new WaitForSeconds(1f);
+        while (true)
+        {
+            if (myRB != null && myRB.velocity.sqrMagnitude < 0.01f)
+            {
+                model.transform.localRotation = transform.rotation;
+                transform.rotation = Quaternion.identity;
+                StartCoroutine(GrowPlant());
+                StartCoroutine(Energy());
+                Destroy(myRB);
+            }
+            yield return null;
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (myRB != null && transform.position.y < 2f && myRB.velocity.sqrMagnitude < 0.01f)
-        {
-            model.transform.localRotation = transform.rotation;
-            transform.rotation = Quaternion.identity;
-            StartCoroutine(GrowPlant());
-            Destroy(myRB);
-        }
 
         if(myRB!=null && transform.position.y < -10f)
         {

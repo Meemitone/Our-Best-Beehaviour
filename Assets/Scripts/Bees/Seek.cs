@@ -39,7 +39,7 @@ public class Seek : Behaviour
                     {
                         foreach (Transform flower in box.objectsInBox)
                         {
-                            if (flower.tag == "Flower")
+                            if (flower!=null && flower.tag == "Flower")
                             {
                                 if (tarFlower == null && !flower.GetComponent<BeeInteraction>().takenByBee && flower.GetComponent<Flower>().pollen >= 1 && flower != lastFlower)
                                 {

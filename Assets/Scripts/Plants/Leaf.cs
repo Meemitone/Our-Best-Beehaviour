@@ -8,7 +8,7 @@ public class Leaf : PlantPart
     [SerializeField] GameObject center;
     [SerializeField] GameObject[] radials;
     [SerializeField] float maxCastDist;
-
+    [SerializeField] LayerMask mask;
     [SerializeField] bool debug = false; //draw rays and update ratioDisplay each frame if true
     [SerializeField] bool debugPrint = false; //print colliders hit by central ray if true
     [SerializeField] float ratioDisplay = 0;
@@ -41,9 +41,9 @@ public class Leaf : PlantPart
 
         RaycastHit[] radialCasts = new RaycastHit[radials.Length];
 
-        Physics.Raycast(center.transform.position, LD, out RaycastHit centralCast, maxCastDist, Physics.AllLayers, QueryTriggerInteraction.Collide);
+        Physics.Raycast(center.transform.position, LD, out RaycastHit centralCast, maxCastDist, mask, QueryTriggerInteraction.Collide);
         if (debug)
-            Debug.DrawRay(center.transform.position, LD, centralCast.collider == null ? Color.red : Color.blue);
+            Debug.DrawRay(center.transform.position, LD*maxCastDist, centralCast.collider == null ? Color.red : Color.blue);
         if (debugPrint)
         {
             if (centralCast.collider != null)
@@ -53,9 +53,9 @@ public class Leaf : PlantPart
         }
         for (int i = 0; i < radials.Length; i++)
         {
-            Physics.Raycast(radials[i].transform.position, LD, out radialCasts[i], maxCastDist, Physics.AllLayers, QueryTriggerInteraction.Collide);
+            Physics.Raycast(radials[i].transform.position, LD, out radialCasts[i], maxCastDist, mask, QueryTriggerInteraction.Collide);
             if (debug)
-                Debug.DrawRay(radials[i].transform.position, LD, radialCasts[i].collider == null ? Color.red : Color.blue);
+                Debug.DrawRay(radials[i].transform.position, LD* maxCastDist, radialCasts[i].collider == null ? Color.red : Color.blue);
         }
 
         float blockedCount = 0;

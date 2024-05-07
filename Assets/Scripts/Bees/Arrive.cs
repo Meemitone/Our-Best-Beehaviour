@@ -45,6 +45,12 @@ public class Arrive : Behaviour
 
         Vector3 calForce = new();
 
+        if(arriveTarget == null)
+        {
+            StartCoroutine(PrepareLeave(0.1f));
+            return Vector3.zero;
+        }
+
         calForce = arriveTarget.position - transform.position;
 
         float dis = Vector3.Distance(transform.position, arriveTarget.position);
@@ -63,7 +69,7 @@ public class Arrive : Behaviour
             myBee.polenHeld += arriveTarget.parent.GetComponent<Flower>().TakePollen(myBee.maxPolenHold - myBee.polenHeld, ref myBee.flowData);
 
             print("Ready to leave");
-            StartCoroutine(PrepareLeave());
+            StartCoroutine(PrepareLeave(waitTime));
 
         }
         else if(dis < hiveRange && arriveTarget.tag == "Hive")
@@ -75,15 +81,15 @@ public class Arrive : Behaviour
 
     }
 
-    private IEnumerator PrepareLeave()
+    private IEnumerator PrepareLeave(float waitThis)
     {
 
         print("Ready to leave");
 
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitThis);
 
 
-        if (arriveTarget.parent.TryGetComponent<BeeInteraction>(out BeeInteraction interact))
+        if (arriveTarget != null && arriveTarget.parent.TryGetComponent<BeeInteraction>(out BeeInteraction interact))
         {
             interact.takenByBee = false;
         }

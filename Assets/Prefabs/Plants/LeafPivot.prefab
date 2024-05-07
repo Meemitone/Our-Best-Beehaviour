@@ -346,6 +346,9 @@ MonoBehaviour:
   - {fileID: 1021249149432020155}
   - {fileID: 882219116591957444}
   maxCastDist: 30
+  mask:
+    serializedVersion: 2
+    m_Bits: 1019
   debug: 0
   debugPrint: 0
   ratioDisplay: 0

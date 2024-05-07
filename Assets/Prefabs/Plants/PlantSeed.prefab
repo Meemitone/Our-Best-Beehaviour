@@ -160,6 +160,7 @@ MonoBehaviour:
   model: {fileID: 7336448814927960047}
   debugMutate: 0
   parts: []
+  Generation: 0
 --- !u!54 &7336448816156643278
 Rigidbody:
   m_ObjectHideFlags: 0
