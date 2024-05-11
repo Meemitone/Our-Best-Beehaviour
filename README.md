@@ -46,17 +46,20 @@ Class Group:TU-984/3 (Game Design Year 3 for the whole group)
 
 ## Donnacha (Bees)
 
-| Class/asset | Source |
-|-----------|-----------|
-| MyClass.cs | Self written |
-| MyClass1.cs | Modified from [reference]() |
-| MyClass2.cs | From [reference]() |
+| Class/asset | Source | Purpose |
+|-----------|-----------|-----------|
+| BasicBoid.cs | Self written | Basic boid script to be inherited, calculates total force, holds base class for Behaviour |
+| BeeBoid.cs | Self written (inherit: BeeBoid) | Adds movement to object and rotation based on force |
+| Arrive.cs | Self written (inherit: Behaviour) | Makes a force vector based on a location and distance from it |
+| Flock.cs | Self written (inherit: Behaviour | Makes a force vector based on the nearest 3 bee's currect direction |
+| HoldInArea.cs | Self written (inherit: Behaviour) | Makes a force vector to push the bee back into the simulation area if they leave |
+| Seek.cs | Self written (inherit: Behaviour) | Makes a force towards a flower when one is in range and is available |
+| Wander.cs | Self written (inherit: Behaviour | Makes a slight turning force based on the current direction the object is facing |
+| BoxGenerator.cs | Self written | Generates boxes to map out the total space of the simulation |
+| Box.cs | Self written | Basic container script that holds information about neighbours and objects contained |
 
-Each team member or individual needs to write a paragraph or two explaining what they contributed to the project
+   I created the scripts relating to bees movement and AI in the project, requiring them to do a number of things, including hunting down and interacting with flowers. The bees also had a habit of escaping the bounds of the simulation, so I created an additional behaviour that causes them to return to the simulation. My most proud creation of this project is the seek behaviour as it doubles as a state machine and control center for the boid. The method of doing this is checking if flowers are in the area, if found it removes the wandering, otherwise keeps the wandering going. Once in short range of the flower, it turns on the arrive behaviour to complete the landing of the boid onto the flower. A major learning point for this project is after the fact I learnt a few methods to lower the amount of stress on the computer. A grid system helps only have the bee check a minimum amount of objects to avoid unncessicary amount of calculations and avoid excessive raycasting which is costly on preformance. Some additional performance enhancements could have been preformed, for example bees giving their flocking neighbours themselves to cut down on extra calculations.
 
-- What they did
-- What they are most proud of
-- What they learned
 
 # References
 * Item 1
