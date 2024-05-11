@@ -9,6 +9,8 @@ Donnacha Lohan Davy - D22125453
 Class Group:TU-984/3 (Game Design Year 3 for the whole group)
 
 # Description
+A large simulation of bees and plants in evolutionary harmony. Beehive use pollen to produce bees, bees fetch pollen from plants, plants produce pollen from sunlight. Both bees and plants reproduce using genetic algorithms, allowing them to evolve over the course of the simulation.
+
 
 ## Video:
 
@@ -17,11 +19,33 @@ Class Group:TU-984/3 (Game Design Year 3 for the whole group)
 ## Screenshots
 
 # Instructions
+All inputs appear as on-screen buttons.
 
 # How it works
+Bees, hives and plants decay over time. Bees pollinate plants to keep them alive, they bring the pollen to hives to keep them alive as well. Then the hives produce more bees using this pollen.
 
 # List of classes/assets
 ## Tom (Level Generation and Modelling)
+| Class/asset | Source | Purpose |
+|-----------|-----------|-----------|
+| WorldGenerator.CS | Self Written | Creates and populates the world |
+| Beehive.CS | Self Writtern | Manages hive pollen count and decay |
+| HornetNavigation.CS | Self Written | (Unused, was for predators) |
+| ControlPanel.CS | Self Written | Manages player inputs and sliders |
+| OrbitalPlayer.CS | Self Written | Orbital camera for following bees |
+
+| Control Panel Asset | Self made in unity | Control panel and hotbar for player inputs before and during simulation |
+
+| Bee Model | Self modelled on blender | Used in bee prefab |
+| Bee Texture | Self drawn on photoshop | Used in bee prefab |
+| Bee animations | Self animated in unity | (Walk, fly, idle) |
+| Plant segment models | Self modelled | Used in plant growth |
+| Plant segment textures | Self drawn on photoshop | Used in plants |
+| 2 Mushroom Models | Self modelled | Used in mushroom variants |
+| 4 Mushroom Textures | Self drawn in photoshop | Used in mushrooms |
+| Skybox material | Self-made in unity | Used in simulation world |
+| Basic materials | Self-made in unity | Used in beehive and world |
+
 
 ## Kate (Flowers)
 | Class/asset | Source | Purpose |
