@@ -35,9 +35,7 @@ Bees, hives and plants decay over time. Bees pollinate plants to keep them alive
 | HornetNavigation.CS | Self Written | (Unused, was for predators) |
 | ControlPanel.CS | Self Written | Manages player inputs and sliders |
 | OrbitalPlayer.CS | Self Written | Orbital camera for following bees |
-
 | Control Panel Asset | Self made in unity | Control panel and hotbar for player inputs before and during simulation |
-
 | Bee Model | Self modelled on blender | Used in bee prefab |
 | Bee Texture | Self drawn on photoshop | Used in bee prefab |
 | Bee animations | Self animated in unity | (Walk, fly, idle) |
@@ -60,13 +58,15 @@ Bees, hives and plants decay over time. Bees pollinate plants to keep them alive
 | Flower.cs | Self written | Flower Head, makes pollen for bees, spawns seeds |
 | WindMotion.cs | Self written | Behaviour that makes a xz force for wind |
 | EnvironmentalData.cs | Self written | Holder for sun and wind info |
-| Stalk.cs | Self written |  |
-| MutateGlobal.cs | Self written |
-| WindDisplay.cs | Self written |
-| D20.asset | Self written |
-| HexTorus.asset | Self written |
-| Unit_Hexagonal_Prism.asset | Self written |
-| Kate's Default Material.mat | Self written |
+| Stalk.cs | Self written | PlantPart that sways |
+| MutateGlobal.cs | Self written | A simple singleton to hold mutation values. Honestly should be a scriptable object |
+| WindDisplay.cs | Self written | Debug script to display wind at point |
+| D20.asset | Self written | Mesh I made through script, originally as a placeholder |
+| HexTorus.asset | Self written | Placeholder mesh made via script |
+| Unit_Hexagonal_Prism.asset | Self written | Placeholder mesh made via script |
+| Kate's Default Material.mat | Self made | Render pipeline dislikes Unity's default for some reason |
+
+So the third commit in the repo (Kate Import) was me importing the work I had started outside the project because we hadn't settled on a unity version yet (it was very early days), so this project doesn't have my mesh generators in it (the D20, a isocahedron, was difficult). So I had started work quite early on the flowers, but they weren't reliant on much of anything else. I created the stalk first
 
 ## Rhys(Bee Genetics)
 
