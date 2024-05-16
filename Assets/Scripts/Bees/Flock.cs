@@ -12,14 +12,14 @@ public class Flock : Behaviour
 
     [SerializeField] float pushAway = 2f;
 
-    struct BeeBoi
+    public struct BeeBoi
     {
         public BeeBoid beeBody;
         public float beeDis;
         public Vector3 beeDir;
     }
 
-    private List<BeeBoi> myBois = new();
+    public List<BeeBoi> myBois = new();
 
     private bool beecheck = true;
 
@@ -51,13 +51,14 @@ public class Flock : Behaviour
                     BeeBoi curBee = new();
 
                     curBee.beeDis = Vector3.Distance(transform.position, bee.position);
-                    if (curBee.beeDis < maxDistance && bee.GetComponent<Flock>().active)
+                    if (bee.GetComponent<Flock>().active && !CheckBee(bee) && curBee.beeDis < maxDistance)
                     {
 
                         curBee.beeDir = bee.position - transform.position;
                         curBee.beeBody = bee.GetComponent<BeeBoid>();
                         myBois.Add(curBee);
-
+                        if (myBois.Count >= numOfB)
+                            break;
                     }
                 }
 
@@ -82,30 +83,18 @@ public class Flock : Behaviour
                                 curBee.beeBody = bee.GetComponent<BeeBoid>();
                                 myBois.Add(curBee);
 
+                                if (myBois.Count >= numOfB)
+                                    break;
+
                             }
                         }
 
                     }
+
+                    if (myBois.Count >= numOfB)
+                        break;
                 }
             }
-            List<BeeBoi> newBois = new();
-
-            int length = myBois.Count;
-
-            for (int i = 0; i < numOfB; i++)
-            {
-                BeeBoi cur = new();
-                foreach (BeeBoi boi in myBois)
-                {
-                    if (cur.beeDis == 0 && !newBois.Contains(boi))
-                        cur = boi;
-                    else if (cur.beeDis > boi.beeDis && !newBois.Contains(boi))
-                        cur = boi;
-                }
-                newBois.Add(cur);
-            }
-
-            myBois = newBois;
 
             foreach (BeeBoi beeBoi in myBois)
             {
@@ -114,14 +103,18 @@ public class Flock : Behaviour
                 calForce += beeBoi.beeBody.force;
                 if (beeBoi.beeDis < minDistance)
                     calForce += beeBoi.beeDir * -pushAway;
+
+                beeBoi.beeBody.GetComponent<Flock>().beeBody = beeBody;
             }
 
             calForce = Vector3.ClampMagnitude(calForce, weight);
 
             beecheck = false;
 
-
+            StartCoroutine(Recheck());
         }
+
+        myBois.Clear();
 
         return calForce;
 
@@ -131,6 +124,22 @@ public class Flock : Behaviour
     {
         yield return new WaitForSeconds(timeForCheck);
         beecheck = true;
+    }
+
+    private bool CheckBee(Transform beeCheck)
+    {
+        bool same = false;
+
+        foreach(BeeBoi beeBoi in myBois)
+        {
+            if(beeBoi.beeBody == beecheck)
+            {
+                same = true;
+                break;
+            }
+        }
+
+        return same;
     }
 
     /*[SerializeField] float goldenRatio = 2f;
