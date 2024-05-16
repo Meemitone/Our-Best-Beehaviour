@@ -14,11 +14,14 @@ A large simulation of bees and plants in evolutionary harmony. Beehive use polle
 
 ## Video:
 
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
+[![YouTube](https://i9.ytimg.com/vi/Ed8B2kmqq64/mqdefault.jpg?sqp=CKySmLIG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGBMgQyh_MA8=&rs=AOn4CLCjg5SRFQnVPiNiJV7FhAYeElSegQ)](https://youtu.be/Ed8B2kmqq64)
 
 ## Screenshots
 
-
+![image](https://github.com/Meemitone/Our-Best-Beehaviour/assets/114917172/6f10cbb5-e58c-453e-ad7c-b8d41cfc3538)
+![image](https://github.com/Meemitone/Our-Best-Beehaviour/assets/114917172/db862006-474c-45f6-8e54-685cc8826535)
+![image](https://github.com/Meemitone/Our-Best-Beehaviour/assets/114917172/d71f5f22-fb5c-42fa-8f02-fc930d6c2be0)
+![image](https://github.com/Meemitone/Our-Best-Beehaviour/assets/114917172/ea6ac8b8-7bc6-498a-b5d9-172071947765)
 
 # Instructions
 All inputs appear as on-screen buttons.
