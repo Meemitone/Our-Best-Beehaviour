@@ -73,6 +73,12 @@ So the third commit in the repo (Kate Import) was me importing the work I had st
 Incorporating the wind and sun behaviours into the plant to make a bunch of flowers that behave similarly but are a little bit off from each other in a natural way was very satisfying when it all panned out, and I learned a lot about applying polymorphic principles via the base PlantPart class.
 
 ## Rhys(Bee Genetics)
+| Class/asset | Source | Purpose |
+|-----------|-----------|-----------|
+| HiveGeneticsManager.cs | Self written | Managment script for bee genetics |
+| BeeneticAlgorithm.cs | Self written | Holding place for individual bee stats |
+
+The majority of the work was placed in the hive managment script. the hive was where each bees genetics were stored when a bee entered a hive and they were used when deploying bees from the hive or reproducing new bees. the beeneticAlgorithm script simply held the individual bees genes and was referenced by other scripts on the bee to assign stats such as their speed, weight and strength. My proudest achievement in this project was creating the realistic reproduction, It worked by taking two bees currently in the hive and picking random stats from each until all the components needed for a new bee were present, it then added a mutation factor to avoid a bee having the same genetic code as a single parent but also to simulate evolution as desirable mutations were more likely to succeed and reproduce further. If theres one thing i learned from this project it is how to code in a way that allows for oher scripts to read information from it. Through the many iterations of the hive script i learned ways to improve my code so that it would lend itself better to communicating with other scripts and reading information from them.
 
 ## Donnacha (Bees)
 
