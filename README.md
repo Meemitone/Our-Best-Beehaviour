@@ -49,6 +49,11 @@ Bees, hives and plants decay over time. Bees pollinate plants to keep them alive
 | Skybox material | Self-made in unity | Used in simulation world |
 | Basic materials | Self-made in unity | Used in beehive and world |
 
+My role on this project was to produce all of the art for the game. So each element had to be modelled, textured and some animated. I did all of this by myself in blender and photoshop. Having little experience texturing models I had to learn quickly to pull things together, but everything worked out well, even if the texture sheet is a mess. Initially this project was to have hornet predators which would hunt down the bees and provide an adversary to their evolution. I bega the project writing a navigation script for these boids, it relied on flocking behaviours however did not employ cell space partitioning, as such, the number of these boids capped out at around 200 before the simulation slowed down. This taught me the significant value in cell space partitioning and how important it is not to have many objects checking large lists of other objects every frame. After abandoning this script, for it's code to be salvaged and repurposed in the bee script, I turned towards the art side of the project. 
+
+I began modelling everything, ensuring the plant models were broken down into seperate prefabs for use by the plant growth. I created a model for the bees, making sure the poly count was low enough to make it inexpensive. I then UV mapped the models and hand-drew a texxture for the model. I repeated this process for the mushrooms, creating many different variations to make the scene more decorated.
+
+After this, I hopped into unity to begin pulling all of the elements of the game together. At this point, some of my teammates work was ready to go, so I began scripting a world generator to build and decorate a world for the simulation. I also made player-controls and UI scripts such that the player could interact with the generation and simulation. I created hive scripts to manage the pollen count of hives and to allow the hives to die off if unfed. As a final touch I made an orbital camera script to allow players to look at individual bees.
 
 ## Kate (Flowers)
 | Class/asset | Source | Purpose |
