@@ -14,7 +14,7 @@ A large simulation of bees and plants in evolutionary harmony. Beehive use polle
 
 ## Video:
 
-[![YouTube](https://i9.ytimg.com/vi/Ed8B2kmqq64/mqdefault.jpg?sqp=CKySmLIG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGBMgQyh_MA8=&rs=AOn4CLCjg5SRFQnVPiNiJV7FhAYeElSegQ)](https://youtu.be/Ed8B2kmqq64)
+[![YouTube](https://i.ytimg.com/vi/th-IaddH6yU/maxresdefault.jpg)](https://youtu.be/Ed8B2kmqq64)
 
 ## Screenshots
 
